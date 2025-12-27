@@ -78,4 +78,11 @@ curl -v --request OPTIONS 'http://127.0.0.1:9000' -H 'Origin: http://localhost/s
 
 [FrancescoXX](https://github.com/FrancescoXX/rust-fullstack-app/blob/main/frontend/src/main.rs)
 
+[Html interaction web_sys](https://docs.rs/web-sys/latest/web_sys/)
+
+* Enigma:
+
+[Online tools](https://cryptii.com/pipes/enigma-machine)
+
+https://stackoverflow.com/questions/76567463/rust-yew-rs-dropdown-component
 [![License: WTFPL]
