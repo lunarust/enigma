@@ -1,0 +1,152 @@
+html,
+body {
+  font-size: 14px;
+  font-family: Noto Sans;
+  color: #595959;
+}
+p {
+    padding: 0px;
+    marging: 0px;
+}
+iframe {
+  border: thin;
+}
+ul {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+li {
+  cursor: pointer;
+  width: 40px;
+  margin-left: 10px;
+  margin-top: 0px;
+  padding-left: 10px;
+  list-style-type: none;
+  align: center;
+}
+textarea {
+ max-height: 400px;
+ max-width: 400px;
+ min-height: 200px;
+ min-width: 400px;
+}
+ input[type=text] {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  box-sizing: border-box;
+}
+.selected {
+  font-weight: bolder;
+}
+.top{
+  position: fixed;
+  left: 600px;
+  top: 10px;
+  padding-left: 30px;
+}
+.title{
+    padding-left: 30px;
+    padding-right: 30px;
+    top: 0px;
+    font-weight: bolder;
+    font-size: 16px;
+}
+
+#content {
+  position: fixed;
+  top: 40px;
+  left: 200px;
+  width: 80%;
+  padding: 20px;
+  height: 100%;
+//  justify-content:space-around;
+//  display: flex;
+}
+#form {
+  position: fixed;
+  top: 40px;
+  left: 200px;
+  width: 80%;
+  padding: 20px;
+  justify-content:space-around;
+  display: block;//flex;
+}
+#actions {
+  padding: 10px;
+  margin: 10px;
+  position: relative;
+  display: table;
+  //position: relative;
+  justify-content: center;
+}
+
+#navigation {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  width: 150px;
+  align-items: center;
+  align: center;
+  text-align: center;
+  padding: 20px;
+}
+
+button  {
+  background-color: transparent;
+  color: #36454F;
+  border-width: 0;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 24px;
+  list-style: none;
+  margin: 8;
+  padding: 6px 8px;
+  text-align: center;
+  transition: all 200ms;
+  vertical-align: baseline;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 120px;
+}
+button:hover:enabled {
+    color: #DCDCDC;
+    background-color:  #36454F;
+    box-shadow:0 8px 16px 0 rgba(0,0,0,0.6);
+}
+button:disabled,
+button:disabled:hover,
+button[disabled]{
+  box-shadow:0 0px 0px 0 rgba(0,0,0,0.0);
+  border: 0px;
+  background-color: #transparent;
+  color: #efefef;
+}
+
+
+.watermark {
+    color: #E0E0E0;
+    position: absolute;
+    opacity: 0.25;
+    font-size: 3em;
+    width: 20%;
+    text-align: right;
+    z-index: 1000;
+    right: 0px;
+    bottom: 0px;
+}
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #71797E;
+  color: #efefef;
+  text-align: center;
+  z-index: 0;
+}
