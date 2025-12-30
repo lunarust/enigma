@@ -196,15 +196,17 @@ curl -v --request OPTIONS 'http://127.0.0.1:9000' -H 'Origin: http://localhost/s
 </details>
 
 ## Rotors notches specs (see wikipedia)
-```
-Rotor 	Notch 	Effect
-I 	Q 	If rotor steps from Q to R, the next rotor is advanced
-II 	E 	If rotor steps from E to F, the next rotor is advanced
-III 	V 	If rotor steps from V to W, the next rotor is advanced
-IV 	J 	If rotor steps from J to K, the next rotor is advanced
-V 	Z 	If rotor steps from Z to A, the next rotor is advanced
-VI, VII, VIII 	Z+M 	If rotor steps from Z to A, or from M to N the next rotor is advanced
-```
+
+| Rotor         | Notch         | Effect        |
+| ------------- | ------------- | ------------- |
+|I|Q|If rotor steps from Q to R, the next rotor is advanced|
+|II|E|If rotor steps from E to F, the next rotor is advanced|
+|III|V|If rotor steps from V to W, the next rotor is advanced|
+|IV|J|If rotor steps from J to K, the next rotor is advanced|
+|V|Z|If rotor steps from Z to A, the next rotor is advanced|
+|VI, VII, VIII|Z+M|If rotor steps from Z to A, or from M to N the next rotor is advanced|
+
+
 
 > [!NOTE]
 > All done mostly to learn & play with Rust... (⌒‿⌒)/
@@ -230,11 +232,8 @@ VI, VII, VIII 	Z+M 	If rotor steps from Z to A, or from M to N the next rotor is
 <details>
   <summary>Full journey of a letter</<summary>
 
-```
-RFL  W.4   W.3   W.2   W.1   ETW   PLG
-┌- x <-- i <-- q <-- r <-- w <-- w <-- w (IN)
-└> r --> p --> h --> l --> b --> b --> b (OUT)
 
+```
 # Enigma I — Table-Style Trace
 Configuration (fixed)
 Left rotor: III — BDFHJLCPRTXVZNYEIWGAKMUSQO
