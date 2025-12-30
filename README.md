@@ -5,6 +5,31 @@
 - [ ] Issues when my 3rd rotor ticks
 - [ ] Add Plugboard
 - [ ] Add Option to set rotors start position
+- [ ] Remove special characters
+
+## Issue:
+with,  
+rotor 1, 2, 3
+reflector B
+Plain text:
+DONOTGOGENTLEINTOTHATGOODNIGHTOLDAGESHOULDBURNANDRAVEATCLOSEOFDAYRAGERAGEAGAINSTTHEDYINGOFTHELIGHT
+
+CORRECT >
+OLLZLCBDGWWQSOACEKZQAZUDZQSTYLXUNWHLRXMAQGJCSESXJIYNAPMBOZYLUKRSEAUZHFWXCDNNCMPEPUKAFXZJJMVTUCXARE
+OLLZLCBDGWWQSOACEKZQAZUDZQSTYLXUNWHLRXMAQGJCSESXJIYNAPMBOZYLUKRSEAUZHFWXCDNNCMPEPUKAFXZJJMVTUCZMYU
+< NOT OK
+
+```
+Input = I ➞[Rotor 1]➞ S ➞[Rotor 2]➞ B ➞[Rotor 3]➞ D ➞[Reflector]➞ H ➞[Rotor 3]➞ D ➞[Rotor 2]➞ H ➞[Rotor 1]➞ X = Output
+
+94 REB [I] ↣ I Enigma I [S] ↣ II Enigma I [B] ↣ III Enigma I [E] ⟲ Reflector B [E] ↢ III Enigma I [H] ↢ II Enigma I [G] ↢ I Enigma I ↢ Z
+95 SEB [G] ↣ I Enigma I [K] ↣ II Enigma I [I] ↣ III Enigma I [S] ⟲ Reflector B [S] ↢ III Enigma I [R] ↢ II Enigma I [T] ↢ I Enigma I ↢ M
+96 TEB [H] ↣ I Enigma I [L] ↣ II Enigma I [Y] ↣ III Enigma I [N] ⟲ Reflector B [N] ↢ III Enigma I [E] ↢ II Enigma I [B] ↢ I Enigma I ↢ Y
+97 UEB [T] ↣ I Enigma I [C] ↣ II Enigma I [N] ↣ III Enigma I [X] ⟲ Reflector B [X] ↢ III Enigma I [T] ↢ II Enigma I [E] ↢ I Enigma I ↢ U
+
+```
+
+
 
 ## RunIt
 
@@ -215,8 +240,11 @@ curl -v --request OPTIONS 'http://127.0.0.1:9000' -H 'Origin: http://localhost/s
 ## Acknowledgments & Reference
 
 [Yew](https://yew.rs/docs/tutorial)
+
 [Yew examples](https://github.com/yewstack/yew/tree/master/examples)
+
 [FrancescoXX](https://github.com/FrancescoXX/rust-fullstack-app/blob/main/frontend/src/main.rs)
+
 [Html interaction web_sys](https://docs.rs/web-sys/latest/web_sys/)
 
 ## Enigma:
@@ -224,8 +252,11 @@ curl -v --request OPTIONS 'http://127.0.0.1:9000' -H 'Origin: http://localhost/s
 ### Simulators:
 
 [Cryptii](https://cryptii.com/pipes/enigma-machine)
+
 [CacheSleuth](https://www.cachesleuth.com/enigma.html)
+
 [Berling Physik](https://people.physik.hu-berlin.de/~palloks/js/enigma/enigma-m4_v16_en.html)
+
 [Cryptool](https://www.cryptool.org/en/cto/enigma/)
 
 
