@@ -56,7 +56,7 @@ curl --location 'localhost:9000/scrumble' \
 
 <details>
   <summary>Response:</summary>
-```json
+```yaml
 {
     "plain": "welcome",
     "cryptic": "BFNLZKH",
