@@ -229,12 +229,17 @@ curl -v --request OPTIONS 'http://127.0.0.1:9000' -H 'Origin: http://localhost/s
 [Cryptool](https://www.cryptool.org/en/cto/enigma/)
 
 
+
+### Documentations:
+
+[Rotors Details](https://en.wikipedia.org/wiki/Enigma_rotor_details)
+
+
+
 <details>
   <summary>Full journey of a letter</<summary>
 
-
-
-# Enigma I — Table-Style Trace
+### Enigma I
 Configuration (fixed)
 Left rotor: III — BDFHJLCPRTXVZNYEIWGAKMUSQO
 Middle rotor: II — AJDKSIRUXBLHWTMCQGZNPYFVOE
@@ -243,7 +248,7 @@ Reflector: B — YRUHQSLDPXNGOKMIEBFZCWVJAT
 Ring settings: A A A
 Plugboard: none
 
-## Rotor positions
+#### Rotor positions
 | Rotor       | Before key | After stepping |
 | ----------- | ---------- | -------------- |
 | Left (III)  | A          | A              |
@@ -255,7 +260,7 @@ Letter mappings (A=0 … Z=25)
 | ----------- | ------ | ----- |
 | Key pressed | W      | 22    |
 
-## Forward path (right → left)
+#### Forward path (right → left)
 🔹 Right Rotor — I (pos B, offset +1)
 | Operation         | Value      |
 | ----------------- | ---------- |
@@ -281,13 +286,12 @@ Reflector
 | ----- | ---------- |
 | I (8) | **P (15)** |
 
-## Reverse path (left → right)
+#### Reverse path (left → right)
 🔹 Left Rotor — III (reverse wiring)
 | Operation     | Value     |
 | ------------- | --------- |
 | Input         | P (15)    |
 | Reverse P → H | **7 (H)** |
-
 
 🔹 Middle Rotor — II (reverse wiring)
 | Operation     | Value      |
@@ -303,19 +307,13 @@ Reflector
 | Reverse M → C | 2         |
 | − offset      | **1 (B)** |
 
-
 Final output
 | Result    | Letter |
 | --------- | ------ |
 | Encrypted | **B**  |
 
 
-
 </details>
-
-### Documentations:
-
-[Rotors Details](https://en.wikipedia.org/wiki/Enigma_rotor_details)
 
 
 [![License: WTFPL](https://upload.wikimedia.org/wikipedia/commons/f/fa/WTFPL_badge.png)](/LICENSE.txt)
