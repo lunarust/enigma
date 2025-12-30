@@ -56,7 +56,7 @@ curl --location 'localhost:9000/scrumble' \
 
 <details>
   <summary>Response:</summary>
-  
+
 ```yaml
 {
     "plain": "welcome",
@@ -234,43 +234,12 @@ curl -v --request OPTIONS 'http://127.0.0.1:9000' -H 'Origin: http://localhost/s
 
 
 
-> [!NOTE]
-> All done mostly to learn & play with Rust... (⌒‿⌒)/
-
-
-## Acknowledgments & Reference
-
-[Yew](https://yew.rs/docs/tutorial)
-
-[Yew examples](https://github.com/yewstack/yew/tree/master/examples)
-
-[FrancescoXX](https://github.com/FrancescoXX/rust-fullstack-app/blob/main/frontend/src/main.rs)
-
-[Html interaction web_sys](https://docs.rs/web-sys/latest/web_sys/)
-
-## Enigma:
-
-### Simulators:
-
-[Cryptii](https://cryptii.com/pipes/enigma-machine)
-
-[CacheSleuth](https://www.cachesleuth.com/enigma.html)
-
-[Berling Physik](https://people.physik.hu-berlin.de/~palloks/js/enigma/enigma-m4_v16_en.html)
-
-[Cryptool](https://www.cryptool.org/en/cto/enigma/)
-
-
-
-### Documentations:
-
-[Rotors Details](https://en.wikipedia.org/wiki/Enigma_rotor_details)
-
-
-
 <details>
-  <summary>Full journey of a letter</<summary>
+
+  <summary>Full journey of a letter</summary>
+
 ### Enigma I
+
 Configuration (fixed)
 Left rotor: III — BDFHJLCPRTXVZNYEIWGAKMUSQO
 Middle rotor: II — AJDKSIRUXBLHWTMCQGZNPYFVOE
@@ -342,7 +311,42 @@ Final output
 | Result    | Letter |
 | --------- | ------ |
 | Encrypted | **B**  |
+
 </details>
+
+## Acknowledgments & Reference
+
+[Yew](https://yew.rs/docs/tutorial)
+
+[Yew examples](https://github.com/yewstack/yew/tree/master/examples)
+
+[FrancescoXX](https://github.com/FrancescoXX/rust-fullstack-app/blob/main/frontend/src/main.rs)
+
+[Html interaction web_sys](https://docs.rs/web-sys/latest/web_sys/)
+
+## Enigma:
+
+### Simulators:
+
+[Cryptii](https://cryptii.com/pipes/enigma-machine)
+
+[CacheSleuth](https://www.cachesleuth.com/enigma.html)
+
+[Berling Physik](https://people.physik.hu-berlin.de/~palloks/js/enigma/enigma-m4_v16_en.html)
+
+[Cryptool](https://www.cryptool.org/en/cto/enigma/)
+
+
+
+### Documentations:
+
+[Rotors Details](https://en.wikipedia.org/wiki/Enigma_rotor_details)
+
+
+
+> [!NOTE]
+> All done mostly to learn & play with Rust... (⌒‿⌒)/
+
 
 
 [![License: WTFPL](https://upload.wikimedia.org/wikipedia/commons/f/fa/WTFPL_badge.png)](/LICENSE.txt)
