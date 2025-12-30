@@ -55,7 +55,7 @@ curl --location 'localhost:9000/scrumble' \
 ```
 
 <details>
-  <<summary>Response:</summary>
+  <summary>Response:</summary>
 ```json
 {
     "plain": "welcome",
@@ -269,7 +269,6 @@ curl -v --request OPTIONS 'http://127.0.0.1:9000' -H 'Origin: http://localhost/s
 
 <details>
   <summary>Full journey of a letter</<summary>
-
 ### Enigma I
 Configuration (fixed)
 Left rotor: III — BDFHJLCPRTXVZNYEIWGAKMUSQO
@@ -342,8 +341,6 @@ Final output
 | Result    | Letter |
 | --------- | ------ |
 | Encrypted | **B**  |
-
-
 </details>
 
 
