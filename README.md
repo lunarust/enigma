@@ -310,6 +310,7 @@ Final output
 | Encrypted | **B**  |
 
 ```
+
 </details>
 
 ### Documentations:
