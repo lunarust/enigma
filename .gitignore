@@ -3,6 +3,7 @@
 /frontend/pkg
 /frontend/dist
 /frontend/target
+/frontend/src/failures
 /backend/target
 Cargo.lock
 **/src/config/Default.toml

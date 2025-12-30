@@ -1,28 +1,32 @@
 [package]
-name = "frontend"
+name = "function_router"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
 
 
 [dependencies]
-yew = { git = "https://github.com/yewstack/yew/", features = ["csr"] }
-
 common = { version = "0.1.0", path = "../common" }
+
+yew = { version = "0.22", features = ["csr", "serde"] }
+yew-router = "0.19.0"
+
+wasm-bindgen-futures = "0.4"
 wasm-bindgen = "0.2.105"
+wasm-logger = "0.2"
+log = "0.4"
+
 serde_json = "1.0.145"
-serde = { version = "1.0.152", features = ["derive"] }
-anyhow = "1"
-chrono = "0.4"
-url = "2.2.2"
-lazy_static = "1.4"
 gloo-net = "0.6.0"
 gloo = "0.11"
-wasm-bindgen-futures = "0.4"
+implicit-clone = "0.6.0"
 
 reqwest = { version = "0.12.24", features = ["json", "stream"] }
 web-sys = { version = "0.3", features = ["Event","EventTarget","InputEvent"] }
 #[lib]
 #crate-type = ["cdylib", "rlib"]
 js-sys = "0.3"
-[build]
-target="wasm32-unknown-unknown"
+
+
+[[bin]]
+name = "function_router"
+required-features = ["yew/csr"]
