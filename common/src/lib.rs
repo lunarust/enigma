@@ -1,14 +1,52 @@
 use serde::{Deserialize, Serialize};
+use serde_json;
 
-const ROTORS: [&str; 5] = ["BDFHJLCPRTXVZNYEIWGAKMUSQO", "AJDKSIRUXBLHWTMCQGZNPYFVOE", "EKMFLGDQVZNTOWYHXUSPAIBRCJ", "ESOVPZJAYQUIRHXLNFTGKDCMWB", "VZBRGITYUPSDNHLXAWMJQOFECK"];
-const ROMAN: [&str; 5] = ["I", "II", "III", "IV", "V"];
+const REFLECTORS_DATA: &str = r#"[{"id":1,"name": "Beta", "definition": "LEYJVCNIXWPBQMDRTAKZGFUHOS", "model": "M4 R2"},
+{"id":2,"name": "Gamma", "definition": "FSOKANUERHMBTIYCWLQPZXVGJD", "model": "M4 R2"},
+{"id":3,"name": "Reflector A", "definition": "EJMZALYXVBWFCRQUONTSPIKHGD", "model": ""},
+{"id":4,"name": "Reflector B", "definition": "YRUHQSLDPXNGOKMIEBFZCWVJAT", "model": "M3"},
+{"id":5,"name": "Reflector C", "definition": "FVPJIAOYEDRZXWGCTKUQSBNMHL", "model": "M3"},
+{"id":6,"name": "Reflector B Dünn", "definition": "ENKQAUYWJICOPBLMDXZVFTHRGS", "model": "M4 R1 (M3 + Dünn)"},
+{"id":7,"name": "Reflector C Dünn", "definition": "RDOBJNTKVEHMLFCWZAXGYIPSUQ", "model": "M4 R1 (M3 + Dünn)"}]
+"#;
+
+const ROTORS_DATA: &str = r#"[{"id":0,"name":"I Enigma I", "definition": "EKMFLGDQVZNTOWYHXUSPAIBRCJ", "model": "Enigma I"},
+{"id":1,"name":"II Enigma I", "definition": "AJDKSIRUXBLHWTMCQGZNPYFVOE", "model": "Enigma I"},
+{"id":2,"name":"III Enigma I", "definition": "BDFHJLCPRTXVZNYEIWGAKMUSQO", "model": "Enigma I"},
+{"id":3,"name":"IV M3 Army", "definition": "ESOVPZJAYQUIRHXLNFTGKDCMWB", "model": "M3 Army"},
+{"id":4,"name":"V M3 Army", "definition": "VZBRGITYUPSDNHLXAWMJQOFECK", "model": "M3 Army"},
+{"id":5,"name":"VI M3 & M4 Naval", "definition": "JPGVOUMFYQBENHZRDKASXLICTW", "model": "M3 & M4 Naval"},
+{"id":6,"name":"VII M3 & M4 Naval", "definition": "NZJHGRCXMYSWBOUFAIVLPEKQDT", "model": "M3 & M4 Naval"},
+{"id":7,"name":"VIII M3 & M4 Naval", "definition": "FKQHTLXOCBJSPDZRAMEWNIUYGV", "model": "M3 & M4 Naval"},
+{"id":8,"name":"I", "definition": "JGDQOXUSCAMIFRVTPNEWKBLZYH", "model": "German Railway (Rocket)"},
+{"id":9,"name":"II", "definition": "NTZPSFBOKMWRCJDIVLAEYUXHGQ", "model": "German Railway (Rocket)"},
+{"id":10,"name":"III", "definition": "JVIUBHTCDYAKEQZPOSGXNRMWFL", "model": "German Railway (Rocket)"},
+{"id":11,"name":"UKW", "definition": "QYHOGNECVPUZTFDJAXWMKISRBL", "model": "German Railway (Rocket)"},
+{"id":12,"name":"ETW", "definition": "QWERTZUIOASDFGHJKPYXCVBNML", "model": "German Railway (Rocket)"}
+]
+"#;
 
 #[derive(Serialize, Deserialize, Clone, PartialEq, Debug)]
-pub struct Ciphertext {
-    pub rotor: Vec<i32>,
-    pub plain: String,
-    pub cryptic: String,
-    pub reflector: String,
+pub struct Reflector {
+    pub id: i32,
+    pub name: String,
+    pub definition: String,
+    pub model: String,
+}
+pub fn reflector_setup () -> Vec<Reflector> {
+    let rt: Vec<Reflector> = serde_json::from_str(REFLECTORS_DATA)
+        .expect("error while reading or parsing");
+    rt
+}
+impl Default for Reflector {
+    fn default() -> Self {
+        Self {
+            id: 4,
+            name: "Reflector B".to_string(),
+            definition: "YRUHQSLDPXNGOKMIEBFZCWVJAT".to_string(),
+            model: "M3".to_string()
+        }
+   }
 }
 
 #[derive(Serialize, Deserialize, Clone, PartialEq, Debug)]
@@ -16,24 +54,32 @@ pub struct CipherRotor {
     pub id: i32,
     pub name: String,
     pub definition: String,
+    pub model: String,
 }
 
-pub fn get_rotor(n: i32) -> CipherRotor {
-    //n -= 1;
-    CipherRotor{
-        id: n,
-        name: ROMAN[n as usize].to_string(),
-        definition: ROTORS[n as usize].to_string() }
+impl Default for CipherRotor {
+    fn default() -> Self {
+        Self {
+            id: 0,
+            name: "I Enigma I".to_string(),
+            definition: "EKMFLGDQVZNTOWYHXUSPAIBRCJ".to_string(),
+            model: "Enigma I".to_string(),
+        }
+   }
 }
+
 pub fn rotor_setup () -> Vec<CipherRotor> {
-    let mut rt: Vec<CipherRotor> = vec![];
-    for n in 0..5 {
-        rt.push(CipherRotor {
-            id: n,
-            name: ROMAN[n as usize].to_string(),
-            definition: ROTORS[n as usize].to_string() });
-    }
+    let rt: Vec<CipherRotor> = serde_json::from_str(ROTORS_DATA)
+        .expect("error while reading or parsing");
     rt
+}
+
+#[derive(Serialize, Deserialize, Clone, PartialEq, Debug)]
+pub struct Ciphertext {
+    pub rotor: Vec<CipherRotor>,
+    pub plain: String,
+    pub cryptic: String,
+    pub reflector: Reflector,
 }
 impl Ciphertext {
     pub fn of(ciphertext: Ciphertext) -> Ciphertext {
@@ -42,6 +88,38 @@ impl Ciphertext {
             plain: ciphertext.plain,
             cryptic: ciphertext.cryptic,
             reflector: ciphertext.reflector,
+        }
+    }
+}
+
+#[derive(Serialize, Deserialize, Clone, PartialEq, Debug)]
+pub struct DebugLogs {
+    pub idx: i32,
+    pub offset: Vec<i32>,
+    pub pass: Vec<String>,
+}
+impl DebugLogs {
+    pub fn of (debug_logs: DebugLogs) -> DebugLogs {
+        DebugLogs {
+            idx: debug_logs.idx,
+            offset: debug_logs.offset,
+            pass: debug_logs.pass,
+        }
+    }
+}
+
+#[derive(Serialize, Deserialize, Clone, PartialEq, Debug)]
+pub struct Response {
+    pub plain: String,
+    pub cryptic: String,
+    pub debug_logs: Vec<DebugLogs>,
+}
+impl Response {
+    pub fn of (resp: Response) -> Response {
+        Response {
+            plain: resp.plain,
+            cryptic: resp.cryptic,
+            debug_logs: resp.debug_logs,
         }
     }
 }

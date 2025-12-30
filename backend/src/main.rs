@@ -1,12 +1,12 @@
 #[macro_use]
 extern crate lazy_static;
-use common::*;
-
 use warp::{
     http::{header, Method},
     Filter, Rejection,
 };
+
 mod solve;
+mod punch;
 
 #[tokio::main]
 async fn main() {

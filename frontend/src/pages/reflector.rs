@@ -4,23 +4,22 @@ use common::*;
 
 #[derive(Properties, PartialEq)]
 pub struct ShowListProps {
-    //pub name: AttrValue,
-    pub on_click: Callback<CipherRotor>,
+    pub on_click: Callback<Reflector>,
 }
 
-#[function_component(RotorsDisplay)]
-pub fn rotor_display( ShowListProps { on_click }: &ShowListProps ) -> HtmlResult {
-    let selected_rotor_id = use_state(|| None::<i32>);
+#[function_component(ReflectorDisplay)]
+pub fn reflector_display( ShowListProps { on_click }: &ShowListProps ) -> HtmlResult {
+    let selected_reflector_id = use_state(|| None::<i32>);
 
-    let rotors_all:  Vec<CipherRotor> = common::rotor_setup();
+    let reflector_all:  Vec<Reflector> = common::reflector_setup();
 
-    let on_select = |rotor: &CipherRotor| {
+    let on_select = |reflector: &Reflector| {
         let on_click = on_click.clone();
-        let rotor = rotor.clone();
-        let selected_rotor_id = selected_rotor_id.clone();
+        let reflector = reflector.clone();
+        let selected_reflector_id = selected_reflector_id.clone();
         Callback::from(move |_| {
-            selected_rotor_id.set(Some(rotor.id));
-            on_click.emit(rotor.clone())
+            selected_reflector_id.set(Some(reflector.id));
+            on_click.emit(reflector.clone())
         })
     };
 
@@ -29,9 +28,9 @@ pub fn rotor_display( ShowListProps { on_click }: &ShowListProps ) -> HtmlResult
     Ok(
         html!{
             <ul>
-            for cr in rotors_all {
+            for cr in reflector_all {
 
-                if cr.id == selected_rotor_id.unwrap_or(0) {
+                if cr.id == selected_reflector_id.unwrap_or(4) {
                     <li key={cr.id}
                         class="selected"
                         onclick={on_select(&cr)}

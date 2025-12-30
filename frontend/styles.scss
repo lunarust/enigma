@@ -11,6 +11,10 @@ p {
 iframe {
   border: thin;
 }
+ul, li {
+  max-height : 120px;
+  overflow-y : auto;
+}
 ul {
   margin: 0px;
   padding: 0px;
@@ -18,12 +22,19 @@ ul {
 }
 li {
   cursor: pointer;
-  width: 40px;
-  margin-left: 10px;
+  width: 100%;
+  margin-left: 0px;
   margin-top: 0px;
-  padding-left: 10px;
+  padding-left: 0px;
   list-style-type: none;
   align: center;
+  display: block;
+
+}
+li:hover{
+    color: #DCDCDC;
+    background-color:  #36454F;
+    box-shadow:0 8px 16px 0 rgba(0,0,0,0.6);
 }
 textarea {
  max-height: 400px;
@@ -58,9 +69,10 @@ textarea {
   position: fixed;
   top: 40px;
   left: 200px;
-  width: 80%;
+  width: 60%;
   padding: 20px;
   height: 100%;
+  display: block;
 //  justify-content:space-around;
 //  display: flex;
 }
@@ -73,6 +85,26 @@ textarea {
   justify-content:space-around;
   display: block;//flex;
 }
+#logs {
+  //display:table;
+  position: relative;
+  top: 280px;
+  max-height: 500px;
+  display:table ;
+  font-family: Noto Sans Mono;
+  font-size: 10px;
+  display: block;
+  overflow-y : auto;
+}
+.logs_id {
+  width: 20px;
+  display: inline-block;
+}
+.logs_offset {
+  width: 60px;
+  display: inline-block;
+}
+
 #actions {
   padding: 10px;
   margin: 10px;
@@ -86,7 +118,7 @@ textarea {
   position: fixed;
   top: 0px;
   right: 0px;
-  width: 150px;
+  width: 250px;
   align-items: center;
   align: center;
   text-align: center;
