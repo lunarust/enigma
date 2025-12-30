@@ -1,6 +1,34 @@
 use common::*;
 const STANDARD: &str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
+
+//fn tick_rotors(offset: Vec<i32>, round: i32, )
+fn tick_rotor(notches: Vec<char>, mut current_offset: i32, ticking_notch: i32) -> (i32, bool) {
+    //let mut return = current_offset;
+    // exception for the first rotor ticking each round
+    let mut ticked = false;
+    if notches.len() == 0 {
+       ticked = true;
+       if current_offset == 25 {
+           current_offset = 0;
+       } else {
+           current_offset += 1; }
+    }
+
+    for n in notches {
+        if (n.to_ascii_lowercase() as i32 - 97) == ticking_notch {
+            if current_offset == 25 {
+                current_offset = 0;
+                ticked = true;
+            } else {
+              current_offset += 1;
+              ticked = true;
+            }
+        }
+    }
+    (current_offset, ticked)
+
+}
 pub async fn decrypt(my_rotors: Vec<CipherRotor>,
     reflector: Reflector, message: String) -> (String, Vec<DebugLogs>) {
         let mut message_upper_case = message.to_uppercase();
@@ -13,40 +41,34 @@ pub async fn decrypt(my_rotors: Vec<CipherRotor>,
         for loop_char in 0..message_upper_case.chars().count() {
             let current_letter = message.chars().nth(loop_char).unwrap();
             if current_letter.is_alphabetic() {                                                             // We will ignore punctuations & special characters
-
+                let mut ticked = false;
                 let mut my_logs: Vec<String> = vec![];
-                // We need to start ticking the rotors
-                if offset_array[0] == 26 { offset_array[0] = 1; } else { offset_array[0] += 1; }
-                if (cpt_letters) % 26 == 0 && cpt_letters != 0 {
-                   if offset_array[1] == 26 { offset_array[1] = 0; } else { offset_array[1] += 1; }
-               }
-                if (cpt_letters+1) % 676 == 0 {
-                   if offset_array[2] == 26 { offset_array[2] = 0; } else { offset_array[2] += 1; }
-               }
 
-                //println!("POSITION {:?}", offset_array );
-                //let mut index_position: i32 = (current_letter.to_ascii_lowercase() as i32) - 97;
+                (offset_array[0], ticked) = tick_rotor(vec![], offset_array[0], 1);
+
                 let mut result_letter = current_letter;
                 let mut deb_letter = current_letter;
 
                 // Forward Path Right > Left
                 for rot in 0..3 {
                     result_letter = wire(result_letter, my_rotors[rot].definition.clone(), offset_array[rot]);
-                    //println!("[{}] ↣ {} ↣ {}", deb_letter, my_rotors[rot].name, result_letter);
-                    my_logs.push(format!("[{}] ↣ {} ↣ {}", deb_letter, my_rotors[rot].name, result_letter));
+                    my_logs.push(format!("[{}] ↣ {}", deb_letter, my_rotors[rot].name));
                     deb_letter = result_letter;
                  }
 
                 // Matching with Reflector
                 result_letter = reflector.definition.chars().nth(STANDARD.find(result_letter).unwrap()).unwrap();
-                //println!("[{}] ⟲ {} ⟲ {}", deb_letter, reflector.name, result_letter);
-                my_logs.push(format!("[{}] ⟲ {} ⟲ {}", deb_letter, reflector.name, result_letter));
+                my_logs.push(format!("[{}] ⟲ {}", deb_letter, reflector.name));
 
                 // Forward Path Right > Left
                 for rot in (0..3).rev() {
                     result_letter = reverse(result_letter, my_rotors[rot].definition.clone(), offset_array[rot]);
-                    //println!("[{}] ↢ {} ↢ {}", deb_letter, my_rotors[rot].name, result_letter);
-                    my_logs.push(format!("[{}] ↢ {} ↢ {}", deb_letter, my_rotors[rot].name, result_letter));
+                    if rot == 0 {
+                        my_logs.push(format!("[{}] ↢ {} ↢ {}", deb_letter, my_rotors[rot].name, result_letter));
+                    }
+                    else {
+                        my_logs.push(format!("[{}] ↢ {}", deb_letter, my_rotors[rot].name));
+                    }
 
                     deb_letter = result_letter;
                }
@@ -56,22 +78,28 @@ pub async fn decrypt(my_rotors: Vec<CipherRotor>,
                     result_letter.to_string().as_str()
                 );
 
+                let mut offset_char: Vec<char> = vec![];
+                for el in offset_array.iter() {
+                    offset_char.push(STANDARD.chars().nth((*el) as usize).unwrap_or_else(|| '-'));
+
+                }
+
                 debug_logs_list.push(
                     common::DebugLogs {
                     idx: cpt_letters,
-                    offset: offset_array.clone(),
+                    offset: offset_char.clone(),
                     pass: my_logs}
                 );
+                if ticked { (offset_array[1], ticked) = tick_rotor(my_rotors[0].notch.clone(), offset_array[1], offset_array[0])};
+                if ticked { offset_array[2] = tick_rotor(my_rotors[1].notch.clone(), offset_array[2], offset_array[1]).0};
 
                 cpt_letters += 1;
             }
         }
-        //println!("{:?}", debug_logs_list);
         (message_upper_case, debug_logs_list)
 }
 fn move_next_through_set(set: String, current_index: i32, offset: i32) -> char {
     let set_len: i32 = set.len().try_into().unwrap();
-    //println!("set: {}, current_index: {}, offset: {}", set, current_index, offset);
     set.chars().nth(
         ((current_index + offset) % set_len) as usize
     ).unwrap()
@@ -86,7 +114,10 @@ fn wire(character: char, rotor: String, offset: i32) -> char {
     // Getting matching character from the ROTOR with Offset
     let result_letter = move_next_through_set(rotor.clone(), (character.to_ascii_lowercase() as i32) - 97, offset);
     // Getting matching character from standard alphabet with Offset back
-    move_prev_through_set(STANDARD.to_string(), (result_letter.to_ascii_lowercase() as i32) - 97, offset)
+    move_prev_through_set(
+        STANDARD.to_string(),
+        result_letter.to_ascii_lowercase() as i32 - 97,
+         offset)
 }
 fn reverse(character: char, rotor: String, offset: i32) -> char {
     let result_letter = move_next_through_set(STANDARD.to_string(), STANDARD.find(character).unwrap() as i32, offset);

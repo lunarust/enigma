@@ -2,11 +2,9 @@
 
 
 ## Todo / Could do
-- [ ] All of it
-- [ ] Backend
-- [ ] frontend
-
-
+- [ ] Issues when my 3rd rotor ticks
+- [ ] Add Plugboard
+- [ ] Add Option to set rotors start position
 
 ## RunIt
 
@@ -22,19 +20,145 @@ trunk serve
 ## Tests and other stuff:
 - Quick backend call sample:
 
-```bash
-curl http://localhost:9000/hello/potato
-Hello, potato!
-```
-
-  - scrumble > Will be the endpoint to decrypt/encrypt
 
 ```bash
 
-curl --location 'localhost:9000/scrumble' --header 'Content-Type: application/json' --data '{"cryptic":"","plain":"dsada","reflector":{"definition":"AY BR CU DH EQ FS GL IP JX KN MO TZ VW","id":0,"name":"Reflector B"},"rotor":[0,0,0]}'
+curl --location 'localhost:9000/scrumble' \
+--header 'Content-Type: application/json' \
+--data '{"cryptic":"","plain":"welcome","reflector":{"definition":"YRUHQSLDPXNGOKMIEBFZCWVJAT","id":4,"model":"M3","name":"Reflector B"},"rotor":[{"definition":"EKMFLGDQVZNTOWYHXUSPAIBRCJ","id":0,"model":"Enigma I","name":"I Enigma I","notch":["Q"]},{"definition":"AJDKSIRUXBLHWTMCQGZNPYFVOE","id":1,"model":"Enigma I","name":"II Enigma I","notch":["E"]},{"definition":"BDFHJLCPRTXVZNYEIWGAKMUSQO","id":2,"model":"Enigma I","name":"III Enigma I","notch":["V"]}]}'
 
 ```
 
+<details>
+  <<summary>Response:</summary>
+```json
+{
+    "plain": "welcome",
+    "cryptic": "BFNLZKH",
+    "debug_logs": [
+        {
+            "idx": 0,
+            "offset": [
+                "B",
+                "A",
+                "A"
+            ],
+            "pass": [
+                "[w] ↣ I Enigma I",
+                "[Q] ↣ II Enigma I",
+                "[Q] ↣ III Enigma I",
+                "[I] ⟲ Reflector B",
+                "[I] ↢ III Enigma I",
+                "[H] ↢ II Enigma I",
+                "[L] ↢ I Enigma I ↢ B"
+            ]
+        },
+        {
+            "idx": 1,
+            "offset": [
+                "C",
+                "A",
+                "A"
+            ],
+            "pass": [
+                "[e] ↣ I Enigma I",
+                "[B] ↣ II Enigma I",
+                "[J] ↣ III Enigma I",
+                "[T] ⟲ Reflector B",
+                "[T] ↢ III Enigma I",
+                "[M] ↢ II Enigma I",
+                "[O] ↢ I Enigma I ↢ F"
+            ]
+        },
+        {
+            "idx": 2,
+            "offset": [
+                "D",
+                "A",
+                "A"
+            ],
+            "pass": [
+                "[l] ↣ I Enigma I",
+                "[V] ↣ II Enigma I",
+                "[Y] ↣ III Enigma I",
+                "[Q] ⟲ Reflector B",
+                "[Q] ↢ III Enigma I",
+                "[P] ↢ II Enigma I",
+                "[U] ↢ I Enigma I ↢ N"
+            ]
+        },
+        {
+            "idx": 3,
+            "offset": [
+                "E",
+                "A",
+                "A"
+            ],
+            "pass": [
+                "[c] ↣ I Enigma I",
+                "[Z] ↣ II Enigma I",
+                "[E] ↣ III Enigma I",
+                "[J] ⟲ Reflector B",
+                "[J] ↢ III Enigma I",
+                "[K] ↢ II Enigma I",
+                "[D] ↢ I Enigma I ↢ L"
+            ]
+        },
+        {
+            "idx": 4,
+            "offset": [
+                "F",
+                "A",
+                "A"
+            ],
+            "pass": [
+                "[o] ↣ I Enigma I",
+                "[K] ↣ II Enigma I",
+                "[L] ↣ III Enigma I",
+                "[V] ⟲ Reflector B",
+                "[V] ↢ III Enigma I",
+                "[R] ↢ II Enigma I",
+                "[G] ↢ I Enigma I ↢ Z"
+            ]
+        },
+        {
+            "idx": 5,
+            "offset": [
+                "G",
+                "A",
+                "A"
+            ],
+            "pass": [
+                "[m] ↣ I Enigma I",
+                "[M] ↣ II Enigma I",
+                "[W] ↣ III Enigma I",
+                "[U] ⟲ Reflector B",
+                "[U] ↢ III Enigma I",
+                "[G] ↢ II Enigma I",
+                "[R] ↢ I Enigma I ↢ K"
+            ]
+        },
+        {
+            "idx": 6,
+            "offset": [
+                "H",
+                "A",
+                "A"
+            ],
+            "pass": [
+                "[e] ↣ I Enigma I",
+                "[M] ↣ II Enigma I",
+                "[W] ↣ III Enigma I",
+                "[U] ⟲ Reflector B",
+                "[U] ↢ III Enigma I",
+                "[G] ↢ II Enigma I",
+                "[R] ↢ I Enigma I ↢ H"
+            ]
+        }
+    ]
+}
+```
+ </details>
   - Test CORS:
 
 ```bash
@@ -71,6 +195,16 @@ curl -v --request OPTIONS 'http://127.0.0.1:9000' -H 'Origin: http://localhost/s
 ```
 </details>
 
+## Rotors notches specs (see wikipedia)
+```
+Rotor 	Notch 	Effect
+I 	Q 	If rotor steps from Q to R, the next rotor is advanced
+II 	E 	If rotor steps from E to F, the next rotor is advanced
+III 	V 	If rotor steps from V to W, the next rotor is advanced
+IV 	J 	If rotor steps from J to K, the next rotor is advanced
+V 	Z 	If rotor steps from Z to A, the next rotor is advanced
+VI, VII, VIII 	Z+M 	If rotor steps from Z to A, or from M to N the next rotor is advanced
+```
 
 > [!NOTE]
 > All done mostly to learn & play with Rust... (⌒‿⌒)/
@@ -84,22 +218,19 @@ curl -v --request OPTIONS 'http://127.0.0.1:9000' -H 'Origin: http://localhost/s
 [Html interaction web_sys](https://docs.rs/web-sys/latest/web_sys/)
 
 ## Enigma:
-### Testing:
 
-[Cryptii](https://cryptii.com/pipes/enigma-machine) >> lmhrp kh
-[CacheSleuth](https://www.cachesleuth.com/enigma.html) >> LMHRPKH
-[Berling Physik](https://people.physik.hu-berlin.de/~palloks/js/enigma/enigma-m4_v16_en.html) >> LMHR PKH
-[Cryptool](https://www.cryptool.org/en/cto/enigma/) >> LMHRPKH
+### Simulators:
 
-https://github.com/cryptii/cryptii/blob/main/src/Encoder/Enigma.js
-
+[Cryptii](https://cryptii.com/pipes/enigma-machine)
+[CacheSleuth](https://www.cachesleuth.com/enigma.html)
+[Berling Physik](https://people.physik.hu-berlin.de/~palloks/js/enigma/enigma-m4_v16_en.html)
+[Cryptool](https://www.cryptool.org/en/cto/enigma/)
 
 
-curl --location 'localhost:9000/scrumble' --header 'Content-Type: application/json' --data '{"cryptic":"nrupbob","plain":"welcomedsaljdlasknfsdkfjnsakjeflekaw;nf;wklenfw;lknfsl;fknsdfs","reflector":{"definition":"YRUHQSLDPXNGOKMIEBFZCWVJAT","id":4,"model":"M3","name":"Reflector B"},"rotor":[{"definition":"EKMFLGDQVZNTOWYHXUSPAIBRCJ","id":0,"model":"Enigma I","name":"I Enigma I"},{"definition":"EKMFLGDQVZNTOWYHXUSPAIBRCJ","id":0,"model":"Enigma I","name":"I Enigma I"},{"definition":"EKMFLGDQVZNTOWYHXUSPAIBRCJ","id":0,"model":"Enigma I","name":"I Enigma I"}]}'
+<details>
+  <summary>Full journey of a letter</<summary>
 
-
- curl --location 'localhost:9000/scrumble' --header 'Content-Type: application/json' --data '{"cryptic":"nrupbob","plain":"welcome","reflector":{"definition":"YRUHQSLDPXNGOKMIEBFZCWVJAT","id":4,"model":"M3","name":"Reflector B"},"rotor":[{"definition":"EKMFLGDQVZNTOWYHXUSPAIBRCJ","id":0,"model":"Enigma I","name":"I Enigma I"},{"definition":"EKMFLGDQVZNTOWYHXUSPAIBRCJ","id":0,"model":"Enigma I","name":"I Enigma I"},{"definition":"EKMFLGDQVZNTOWYHXUSPAIBRCJ","id":0,"model":"Enigma I","name":"I Enigma I"}]}'
-
+```
 RFL  W.4   W.3   W.2   W.1   ETW   PLG
 ┌- x <-- i <-- q <-- r <-- w <-- w <-- w (IN)
 └> r --> p --> h --> l --> b --> b --> b (OUT)
@@ -158,9 +289,6 @@ Reflector
 | Input         | P (15)    |
 | Reverse P → H | **7 (H)** |
 
-Input = W ➞[Rotor 1]➞ Q ➞[Rotor 2]➞ Q ➞[Rotor 3]➞ I ➞[Reflector]➞
-P ➞[Rotor 3]➞ H ➞[Rotor 2]➞ L ➞[Rotor 1]➞ B = Output
-
 
 🔹 Middle Rotor — II (reverse wiring)
 | Operation     | Value      |
@@ -176,20 +304,15 @@ P ➞[Rotor 3]➞ H ➞[Rotor 2]➞ L ➞[Rotor 1]➞ B = Output
 | Reverse M → C | 2         |
 | − offset      | **1 (B)** |
 
-EKMFLGDQVZNTOWYHXUSPAIBRCJ
-ABCDEFGHIJKLMNOPQRSTUVWXYZ
-
 
 Final output
 | Result    | Letter |
 | --------- | ------ |
 | Encrypted | **B**  |
 
-out = ( wiring[ (in + P) mod 26 ] − P ) mod 26
+```
+</details>
 
-out = ( inverse_wiring[ (in + P) mod 26 ] − P ) mod 26
-WELCOME 
-BFNLZKH
 ### Documentations:
 
 [Rotors Details](https://en.wikipedia.org/wiki/Enigma_rotor_details)

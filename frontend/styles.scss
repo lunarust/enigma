@@ -89,7 +89,7 @@ textarea {
   //display:table;
   position: relative;
   top: 280px;
-  max-height: 500px;
+  max-height: 450px;
   display:table ;
   font-family: Noto Sans Mono;
   font-size: 10px;
@@ -181,4 +181,7 @@ button[disabled]{
   color: #efefef;
   text-align: center;
   z-index: 0;
+    font-size: 10px;
+  font-family: Noto Sans Mono;
+
 }
