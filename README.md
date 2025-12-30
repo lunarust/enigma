@@ -56,6 +56,7 @@ curl --location 'localhost:9000/scrumble' \
 
 <details>
   <summary>Response:</summary>
+  
 ```yaml
 {
     "plain": "welcome",
