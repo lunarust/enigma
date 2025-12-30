@@ -233,7 +233,7 @@ curl -v --request OPTIONS 'http://127.0.0.1:9000' -H 'Origin: http://localhost/s
   <summary>Full journey of a letter</<summary>
 
 
-```
+
 # Enigma I — Table-Style Trace
 Configuration (fixed)
 Left rotor: III — BDFHJLCPRTXVZNYEIWGAKMUSQO
@@ -309,7 +309,7 @@ Final output
 | --------- | ------ |
 | Encrypted | **B**  |
 
-```
+
 
 </details>
 
