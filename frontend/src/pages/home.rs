@@ -76,7 +76,8 @@ pub fn Home() -> Html {
             spawn_local(async move {
 
                 let json_data = serde_json::json!({
-                    "rotor": [slow.as_ref().unwrap_or(&CipherRotor::default()),
+                    "rotor": [
+                        slow.as_ref().unwrap_or(&CipherRotor::default()),
                         medium.as_ref().unwrap_or(&CipherRotor::default()),
                         fast.as_ref().unwrap_or(&CipherRotor::default())],
                     "plain": plain,
@@ -105,10 +106,10 @@ pub fn Home() -> Html {
 
     html! {
         <div>
-            <h1>{ "Enigma..." }</h1>
+            <span class="watermark">{ "Enigma..." }</span>
             <span id="navigation">
             <h3>{"Rotors"}</h3>
-            <h4>{"Fast: Right position"}</h4>
+            <h4>{"FAST: Right position"}</h4>
             <RotorsDisplay
                 on_click={
                     let cb = on_rotor_select.clone();
@@ -117,7 +118,7 @@ pub fn Home() -> Html {
                 }
             />
             <hr />
-            <h4>{"Medium: Middle position"}</h4>
+            <h4>{"MEDIUM: Middle position"}</h4>
             <RotorsDisplay
                 on_click={
                     let cb = on_rotor_select.clone();
@@ -125,7 +126,7 @@ pub fn Home() -> Html {
                 }
              />
              <hr />
-             <h4>{"Slow: Left position"}</h4>
+             <h4>{"SLOW: Left position"}</h4>
              <RotorsDisplay
                 on_click={
                     let cb = on_rotor_select.clone();

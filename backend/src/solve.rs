@@ -16,7 +16,12 @@ struct Solve {
 pub async fn handle_call(body: Ciphertext) -> Result<impl Reply, warp::Rejection>  {
     println!("Solving {:?} ", body);
 
-    let (output, debug_logs_list) = punch::decrypt(body.rotor.clone(), body.reflector.clone(), body.plain.clone()).await;
+    //let t = body.plain.clone().replace(|c: char| !c.is_ascii(), "");
+    let t = body.plain.clone().replace(|c: char| !c.is_alphabetic(), "");
+
+    //println!("Clean text: {}", t);
+
+    let (output, debug_logs_list) = punch::decrypt(body.rotor.clone(), body.reflector.clone(), t).await;
 
     Ok(json(
         &Response {

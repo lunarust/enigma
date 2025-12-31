@@ -11,14 +11,14 @@ const REFLECTORS_DATA: &str = r#"[{"id":1,"name": "Beta", "definition": "LEYJVCN
 "#;
 
 const ROTORS_DATA: &str =
-r#"[{"id":0,"name":"I Enigma I", "definition": "EKMFLGDQVZNTOWYHXUSPAIBRCJ", "model": "Enigma I", "notch": ["Q"] },
-{"id":1,"name":"II Enigma I", "definition": "AJDKSIRUXBLHWTMCQGZNPYFVOE", "model": "Enigma I", "notch": ["E"] },
-{"id":2,"name":"III Enigma I", "definition": "BDFHJLCPRTXVZNYEIWGAKMUSQO", "model": "Enigma I", "notch": ["V"] },
-{"id":3,"name":"IV M3 Army", "definition": "ESOVPZJAYQUIRHXLNFTGKDCMWB", "model": "M3 Army", "notch": ["J"] },
-{"id":4,"name":"V M3 Army", "definition": "VZBRGITYUPSDNHLXAWMJQOFECK", "model": "M3 Army", "notch": ["Z"] },
-{"id":5,"name":"VI M3 & M4 Naval", "definition": "JPGVOUMFYQBENHZRDKASXLICTW", "model": "M3 & M4 Naval", "notch": ["Z","M"] },
-{"id":6,"name":"VII M3 & M4 Naval", "definition": "NZJHGRCXMYSWBOUFAIVLPEKQDT", "model": "M3 & M4 Naval", "notch": ["Z","M"] },
-{"id":7,"name":"VIII M3 & M4 Naval", "definition": "FKQHTLXOCBJSPDZRAMEWNIUYGV", "model": "M3 & M4 Naval", "notch": ["Z","M"] },
+r#"[{"id":0,"name":"I", "definition": "EKMFLGDQVZNTOWYHXUSPAIBRCJ", "model": "Enigma I", "notch": ["Q"] },
+{"id":1,"name":"II", "definition": "AJDKSIRUXBLHWTMCQGZNPYFVOE", "model": "Enigma I", "notch": ["E"] },
+{"id":2,"name":"III", "definition": "BDFHJLCPRTXVZNYEIWGAKMUSQO", "model": "Enigma I", "notch": ["V"] },
+{"id":3,"name":"IV", "definition": "ESOVPZJAYQUIRHXLNFTGKDCMWB", "model": "M3 Army", "notch": ["J"] },
+{"id":4,"name":"V", "definition": "VZBRGITYUPSDNHLXAWMJQOFECK", "model": "M3 Army", "notch": ["Z"] },
+{"id":5,"name":"VI", "definition": "JPGVOUMFYQBENHZRDKASXLICTW", "model": "M3 & M4 Naval", "notch": ["Z","M"] },
+{"id":6,"name":"VII", "definition": "NZJHGRCXMYSWBOUFAIVLPEKQDT", "model": "M3 & M4 Naval", "notch": ["Z","M"] },
+{"id":7,"name":"VIII", "definition": "FKQHTLXOCBJSPDZRAMEWNIUYGV", "model": "M3 & M4 Naval", "notch": ["Z","M"] },
 {"id":8,"name":"I", "definition": "JGDQOXUSCAMIFRVTPNEWKBLZYH", "model": "German Railway (Rocket)", "notch": ["Z"]},
 {"id":9,"name":"II", "definition": "NTZPSFBOKMWRCJDIVLAEYUXHGQ", "model": "German Railway (Rocket)", "notch": ["Z"]},
 {"id":10,"name":"III", "definition": "JVIUBHTCDYAKEQZPOSGXNRMWFL", "model": "German Railway (Rocket)", "notch": ["Z"]},
@@ -63,7 +63,7 @@ impl Default for CipherRotor {
     fn default() -> Self {
         Self {
             id: 0,
-            name: "I Enigma I".to_string(),
+            name: "I".to_string(),
             definition: "EKMFLGDQVZNTOWYHXUSPAIBRCJ".to_string(),
             model: "Enigma I".to_string(),
             notch: ['Q'].to_vec(),

@@ -2,14 +2,24 @@
 
 
 ## Todo / Could do
-- [ ] Issues when my 3rd rotor ticks
+- [X] Issues when my 3rd rotor ticks - identified, seems related to the double stepping effect...
 - [ ] Add Plugboard
 - [ ] Add Option to set rotors start position
-- [ ] Remove special characters
+- [X] Remove special characters
+- [ ] Allow decryption
+- [ ] Add the full definition of the settings in the logs
+- [X] Turn message to Vector
 
-## Issue:
-with,  
-rotor 1, 2, 3
+
+## Issue detected:
+
+
+<details>
+
+  <summary>## Issue 001: Double Stepping</summary>
+
+```
+with, rotor I, II, III Enigma I
 reflector B
 Plain text:
 DONOTGOGENTLEINTOTHATGOODNIGHTOLDAGESHOULDBURNANDRAVEATCLOSEOFDAYRAGERAGEAGAINSTTHEDYINGOFTHELIGHT
@@ -18,18 +28,41 @@ CORRECT >
 OLLZLCBDGWWQSOACEKZQAZUDZQSTYLXUNWHLRXMAQGJCSESXJIYNAPMBOZYLUKRSEAUZHFWXCDNNCMPEPUKAFXZJJMVTUCXARE
 OLLZLCBDGWWQSOACEKZQAZUDZQSTYLXUNWHLRXMAQGJCSESXJIYNAPMBOZYLUKRSEAUZHFWXCDNNCMPEPUKAFXZJJMVTUCZMYU
 < NOT OK
+```
+
+Results:
 
 ```
-Input = I ➞[Rotor 1]➞ S ➞[Rotor 2]➞ B ➞[Rotor 3]➞ D ➞[Reflector]➞ H ➞[Rotor 3]➞ D ➞[Rotor 2]➞ H ➞[Rotor 1]➞ X = Output
+Others:
+94 Turned wheels from PDA to QDAInput = L ➞[Rotor 1]➞ U ➞[Rotor 2]➞ S ➞[Rotor 3]➞ G ➞[Reflector]➞ L ➞[Rotor 3]➞ F ➞[Rotor 2]➞ C ➞[Rotor 1]➞ C = Output
+95 Turned wheels from QDA to REAInput = I ➞[Rotor 1]➞ S ➞[Rotor 2]➞ B ➞[Rotor 3]➞ D ➞[Reflector]➞ H ➞[Rotor 3]➞ D ➞[Rotor 2]➞ H ➞[Rotor 1]➞ X = Output
+96 Turned wheels from REA to SFBInput = G ➞[Rotor 1]➞ K ➞[Rotor 2]➞ X ➞[Rotor 3]➞ P ➞[Reflector]➞ I ➞[Rotor 3]➞ D ➞[Rotor 2]➞ A ➞[Rotor 1]➞ A = Output
+97 Turned wheels from SFB to TFBInput = H ➞[Rotor 1]➞ L ➞[Rotor 2]➞ L ➞[Rotor 3]➞ Y ➞[Reflector]➞ A ➞[Rotor 3]➞ Z ➞[Rotor 2]➞ U ➞[Rotor 1]➞ R = Output
+98 Turned wheels from TFB to UFBInput = T ➞[Rotor 1]➞ C ➞[Rotor 2]➞ P ➞[Rotor 3]➞ H ➞[Reflector]➞ D ➞[Rotor 3]➞ O ➞[Rotor 2]➞ I ➞[Rotor 1]➞ E = Output
 
+Me:
+92 PDA [E] ↣ I Enigma I [A] ↣ II Enigma I [H] ↣ III Enigma I [P] ⟲ Reflector B [P] ↢ III Enigma I [Q] ↢ II Enigma I [K] ↢ I Enigma I ↢ U
+93 QDA [L] ↣ I Enigma I [U] ↣ II Enigma I [S] ↣ III Enigma I [G] ⟲ Reflector B [G] ↢ III Enigma I [F] ↢ II Enigma I [C] ↢ I Enigma I ↢ C
 94 REB [I] ↣ I Enigma I [S] ↣ II Enigma I [B] ↣ III Enigma I [E] ⟲ Reflector B [E] ↢ III Enigma I [H] ↢ II Enigma I [G] ↢ I Enigma I ↢ Z
 95 SEB [G] ↣ I Enigma I [K] ↣ II Enigma I [I] ↣ III Enigma I [S] ⟲ Reflector B [S] ↢ III Enigma I [R] ↢ II Enigma I [T] ↢ I Enigma I ↢ M
 96 TEB [H] ↣ I Enigma I [L] ↣ II Enigma I [Y] ↣ III Enigma I [N] ⟲ Reflector B [N] ↢ III Enigma I [E] ↢ II Enigma I [B] ↢ I Enigma I ↢ Y
 97 UEB [T] ↣ I Enigma I [C] ↣ II Enigma I [N] ↣ III Enigma I [X] ⟲ Reflector B [X] ↢ III Enigma I [T] ↢ II Enigma I [E] ↢ I Enigma I ↢ U
 
 ```
+Issue is related to the double stepping, need to review this.
 
+</details>
 
+<details>
+
+<summary>## Issue 002: Non A-B char in set / foreign language ✔ </summary>
+
+```bash  
+thread 'tokio-runtime-worker' (205303) panicked at backend/src/punch.rs:74:36:
+assertion failed: self.is_char_boundary(n)
+```
+
+</details>
 
 ## RunIt
 
@@ -221,7 +254,8 @@ curl -v --request OPTIONS 'http://127.0.0.1:9000' -H 'Origin: http://localhost/s
 ```
 </details>
 
-## Rotors notches specs (see wikipedia)
+## Rotors notches specs
+(see wikipedia page, link in footnotes)
 
 | Rotor         | Notch         | Effect        |
 | ------------- | ------------- | ------------- |
@@ -316,32 +350,28 @@ Final output
 
 ## Acknowledgments & Reference
 
-[Yew](https://yew.rs/docs/tutorial)
-
-[Yew examples](https://github.com/yewstack/yew/tree/master/examples)
-
-[FrancescoXX](https://github.com/FrancescoXX/rust-fullstack-app/blob/main/frontend/src/main.rs)
-
-[Html interaction web_sys](https://docs.rs/web-sys/latest/web_sys/)
+- [Yew](https://yew.rs/docs/tutorial)
+- [Yew examples](https://github.com/yewstack/yew/tree/master/examples)
+- [FrancescoXX](https://github.com/FrancescoXX/rust-fullstack-app/blob/main/frontend/src/main.rs)
+- [Html interaction web_sys](https://docs.rs/web-sys/latest/web_sys/)
 
 ## Enigma:
 
 ### Simulators:
 
-[Cryptii](https://cryptii.com/pipes/enigma-machine)
-
-[CacheSleuth](https://www.cachesleuth.com/enigma.html)
-
-[Berling Physik](https://people.physik.hu-berlin.de/~palloks/js/enigma/enigma-m4_v16_en.html)
-
-[Cryptool](https://www.cryptool.org/en/cto/enigma/)
+- [Cryptii](https://cryptii.com/pipes/enigma-machine)
+- [CacheSleuth](https://www.cachesleuth.com/enigma.html)
+- [Berling Physik](https://people.physik.hu-berlin.de/~palloks/js/enigma/enigma-m4_v16_en.html)
+- [Cryptool](https://www.cryptool.org/en/cto/enigma/)
 
 
 
 ### Documentations:
 
-[Rotors Details](https://en.wikipedia.org/wiki/Enigma_rotor_details)
-
+- [Rotors Details](https://en.wikipedia.org/wiki/Enigma_rotor_details)
+- [Stanford, the Enigma machine](https://web.stanford.edu/class/cs106j/handouts/36-TheEnigmaMachine.pdf)
+- [Code & ciphers #Rotorspec](https://www.codesandciphers.org.uk/enigma/rotorspec.htm)
+- [Code & ciphers #ex](https://www.codesandciphers.org.uk/enigma/example1.htm)
 
 
 > [!NOTE]

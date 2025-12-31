@@ -36,14 +36,14 @@ pub fn rotor_display( ShowListProps { on_click }: &ShowListProps ) -> HtmlResult
                         class="selected"
                         onclick={on_select(&cr)}
                     >
-                    { &cr.name }{ format!(" {:?}", &cr.notch) }
+                    { format!("{} - {} Notch: {:?}", &cr.model, &cr.name, &cr.notch) }
                     </li>
                 }
                 else {
                     <li key={cr.id}
                     onclick={on_select(&cr)}
                     >
-                    { &cr.name }{ format!(" {:?}", &cr.notch) }
+                    { format!("{} - {} Notch: {:?}", &cr.model, &cr.name, &cr.notch) }
                     </li>
 
                 }
