@@ -29,25 +29,25 @@ fn tick_rotor(notches: Vec<char>, mut current_offset: i32, ticking_notch: i32) -
 }
 pub async fn decrypt(my_rotors: Vec<CipherRotor>,
     reflector: Reflector, message: String) -> (String, Vec<DebugLogs>) {
-        let mut message_upper_case = message.to_uppercase();
 
         let mut offset_array: Vec<i32> = [0,0,0].to_vec();
         let mut cpt_letters = 0;
 
         let mut debug_logs_list: Vec<DebugLogs> = vec![];
+        let mut message_vec: Vec<char> = message.chars().collect();
 
-        for loop_char in 0..message_upper_case.chars().count() {
-            let current_letter = message.chars().nth(loop_char).unwrap();
+        for (loop_char, current_letter) in message_vec.clone().iter().enumerate() {
 
-            // We will ignore punctuations, special characters & non standard alphabet
-            if current_letter.is_alphabetic() && STANDARD.contains(current_letter) { 
+            // Ignore punctuations, special characters & non standard alphabet
+            if current_letter.is_alphabetic() &&
+                STANDARD.to_ascii_lowercase().find(*current_letter) != None {
                 let mut ticked = false;
                 let mut my_logs: Vec<String> = vec![];
 
                 (offset_array[0], ticked) = tick_rotor(vec![], offset_array[0], 1);
 
-                let mut result_letter = current_letter;
-                let mut deb_letter = current_letter;
+                let mut result_letter = *current_letter;
+                let mut deb_letter = result_letter;
 
                 // WIRING. Forward Path Right > Left
                 for rot in 0..3 {
@@ -73,15 +73,13 @@ pub async fn decrypt(my_rotors: Vec<CipherRotor>,
                     deb_letter = result_letter;
                }
 
-                message_upper_case.replace_range(
-                    (loop_char)..(loop_char+1),
-                    result_letter.to_string().as_str()
-                );
+               // replacing the character back into the vector
+               message_vec[loop_char] = result_letter;
 
+               // For logs and debugging only
                 let mut offset_char: Vec<char> = vec![];
                 for el in offset_array.iter() {
                     offset_char.push(STANDARD.chars().nth((*el) as usize).unwrap_or_else(|| '-'));
-
                 }
 
                 debug_logs_list.push(
@@ -90,13 +88,15 @@ pub async fn decrypt(my_rotors: Vec<CipherRotor>,
                     offset: offset_char.clone(),
                     pass: my_logs}
                 );
+
                 if ticked { (offset_array[1], ticked) = tick_rotor(my_rotors[0].notch.clone(), offset_array[1], offset_array[0])};
                 if ticked { offset_array[2] = tick_rotor(my_rotors[1].notch.clone(), offset_array[2], offset_array[1]).0};
 
                 cpt_letters += 1;
             }
         }
-        (message_upper_case, debug_logs_list)
+        // Converting working vector to string
+        (message_vec.iter().cloned().collect::<String>(), debug_logs_list)
 }
 fn move_next_through_set(set: String, current_index: i32, offset: i32) -> char {
     let set_len: i32 = set.len().try_into().unwrap();

@@ -7,6 +7,8 @@
 - [ ] Add Option to set rotors start position
 - [X] Remove special characters
 - [ ] Allow decryption
+- [ ] Add the full definition of the settings in the logs
+- [ ] Turn message to Vector
 
 
 ## Issue detected:
@@ -53,7 +55,7 @@ Issue is related to the double stepping, need to review this.
 
 <details>
 
-<<summary>## Issue 002: Not correct Char in text ✔ </summary>
+<summary>## Issue 002: Non A-B char in set / foreign language ✔ </summary>
 
 ```bash  
 thread 'tokio-runtime-worker' (205303) panicked at backend/src/punch.rs:74:36:
