@@ -27,7 +27,7 @@ li {
   margin-top: 0px;
   padding-left: 0px;
   list-style-type: none;
-  align: center;
+  align: left;
   display: block;
 
 }
@@ -68,7 +68,7 @@ textarea {
 #content {
   position: fixed;
   top: 40px;
-  left: 200px;
+  left: 100px;
   width: 60%;
   padding: 20px;
   height: 100%;
@@ -79,8 +79,8 @@ textarea {
 #form {
   position: fixed;
   top: 40px;
-  left: 200px;
-  width: 80%;
+  left: 100px;
+  width: 60%;
   padding: 20px;
   justify-content:space-around;
   display: block;//flex;
@@ -118,10 +118,10 @@ textarea {
   position: fixed;
   top: 0px;
   right: 0px;
-  width: 250px;
-  align-items: center;
-  align: center;
-  text-align: center;
+  width:320px;
+  align-items: left;
+  align: left;
+  text-align: left;
   padding: 20px;
 }
 

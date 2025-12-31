@@ -5,15 +5,16 @@
 - [X] Issues when my 3rd rotor ticks - identified, seems related to the double stepping effect...
 - [ ] Add Plugboard
 - [ ] Add Option to set rotors start position
-- [ ] Remove special characters
+- [X] Remove special characters
+- [ ] Allow decryption
 
 
 ## Issue detected:
 
 <details>
   <summary>## Issue 001: Double Stepping</summary>
-with,  
-rotor 1, 2, 3
+```
+with, rotor I, II, III Enigma I
 reflector B
 Plain text:
 DONOTGOGENTLEINTOTHATGOODNIGHTOLDAGESHOULDBURNANDRAVEATCLOSEOFDAYRAGERAGEAGAINSTTHEDYINGOFTHELIGHT
@@ -22,6 +23,9 @@ CORRECT >
 OLLZLCBDGWWQSOACEKZQAZUDZQSTYLXUNWHLRXMAQGJCSESXJIYNAPMBOZYLUKRSEAUZHFWXCDNNCMPEPUKAFXZJJMVTUCXARE
 OLLZLCBDGWWQSOACEKZQAZUDZQSTYLXUNWHLRXMAQGJCSESXJIYNAPMBOZYLUKRSEAUZHFWXCDNNCMPEPUKAFXZJJMVTUCZMYU
 < NOT OK
+```
+
+Results:
 
 ```
 Others:

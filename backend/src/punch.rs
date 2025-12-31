@@ -2,9 +2,8 @@ use common::*;
 const STANDARD: &str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 
-//fn tick_rotors(offset: Vec<i32>, round: i32, )
 fn tick_rotor(notches: Vec<char>, mut current_offset: i32, ticking_notch: i32) -> (i32, bool) {
-    //let mut return = current_offset;
+
     // exception for the first rotor ticking each round
     let mut ticked = false;
     if notches.len() == 0 {
@@ -27,7 +26,6 @@ fn tick_rotor(notches: Vec<char>, mut current_offset: i32, ticking_notch: i32) -
         }
     }
     (current_offset, ticked)
-
 }
 pub async fn decrypt(my_rotors: Vec<CipherRotor>,
     reflector: Reflector, message: String) -> (String, Vec<DebugLogs>) {
@@ -49,7 +47,7 @@ pub async fn decrypt(my_rotors: Vec<CipherRotor>,
                 let mut result_letter = current_letter;
                 let mut deb_letter = current_letter;
 
-                // Forward Path Right > Left
+                // WIRING. Forward Path Right > Left
                 for rot in 0..3 {
                     result_letter = wire(result_letter, my_rotors[rot].definition.clone(), offset_array[rot]);
                     my_logs.push(format!("[{}] ↣ {}", deb_letter, my_rotors[rot].name));
@@ -60,7 +58,7 @@ pub async fn decrypt(my_rotors: Vec<CipherRotor>,
                 result_letter = reflector.definition.chars().nth(STANDARD.find(result_letter).unwrap()).unwrap();
                 my_logs.push(format!("[{}] ⟲ {}", deb_letter, reflector.name));
 
-                // Forward Path Right > Left
+                // REVERSE. Forward Path Right > Left
                 for rot in (0..3).rev() {
                     result_letter = reverse(result_letter, my_rotors[rot].definition.clone(), offset_array[rot]);
                     if rot == 0 {
@@ -113,7 +111,10 @@ fn move_prev_through_set(set: String, current_index: i32, offset: i32) -> char {
 }
 fn wire(character: char, rotor: String, offset: i32) -> char {
     // Getting matching character from the ROTOR with Offset
-    let result_letter = move_next_through_set(rotor.clone(), (character.to_ascii_lowercase() as i32) - 97, offset);
+    let result_letter = move_next_through_set(
+        rotor.clone(),
+        character.to_ascii_lowercase() as i32 - 97,
+        offset);
     // Getting matching character from standard alphabet with Offset back
     move_prev_through_set(
         STANDARD.to_string(),
@@ -121,6 +122,13 @@ fn wire(character: char, rotor: String, offset: i32) -> char {
         offset)
 }
 fn reverse(character: char, rotor: String, offset: i32) -> char {
-    let result_letter = move_next_through_set(STANDARD.to_string(), STANDARD.find(character).unwrap() as i32, offset);
-    move_prev_through_set(STANDARD.to_string(), rotor.find(result_letter).unwrap() as i32, offset)
+    let result_letter = move_next_through_set(
+        STANDARD.to_string(),
+        STANDARD.find(character).unwrap() as i32,
+        offset);
+
+    move_prev_through_set(
+        STANDARD.to_string(),
+        rotor.find(result_letter).unwrap() as i32,
+        offset)
 }
