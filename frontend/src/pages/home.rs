@@ -106,7 +106,7 @@ pub fn Home() -> Html {
 
     html! {
         <div>
-            <h1>{ "Enigma..." }</h1>
+            <span class="watermark">{ "Enigma..." }</span>
             <span id="navigation">
             <h3>{"Rotors"}</h3>
             <h4>{"FAST: Right position"}</h4>

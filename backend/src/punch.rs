@@ -38,7 +38,9 @@ pub async fn decrypt(my_rotors: Vec<CipherRotor>,
 
         for loop_char in 0..message_upper_case.chars().count() {
             let current_letter = message.chars().nth(loop_char).unwrap();
-            if current_letter.is_alphabetic() {                                                             // We will ignore punctuations & special characters
+
+            // We will ignore punctuations, special characters & non standard alphabet
+            if current_letter.is_alphabetic() && STANDARD.contains(current_letter) { 
                 let mut ticked = false;
                 let mut my_logs: Vec<String> = vec![];
 
@@ -50,22 +52,22 @@ pub async fn decrypt(my_rotors: Vec<CipherRotor>,
                 // WIRING. Forward Path Right > Left
                 for rot in 0..3 {
                     result_letter = wire(result_letter, my_rotors[rot].definition.clone(), offset_array[rot]);
-                    my_logs.push(format!("[{}] ↣ {}", deb_letter, my_rotors[rot].name));
+                    my_logs.push(format!("[{}] ↣ Rotor: {}", deb_letter, my_rotors[rot].name));
                     deb_letter = result_letter;
                  }
 
                 // Matching with Reflector
                 result_letter = reflector.definition.chars().nth(STANDARD.find(result_letter).unwrap()).unwrap();
-                my_logs.push(format!("[{}] ⟲ {}", deb_letter, reflector.name));
+                my_logs.push(format!("[{}] ⟲ {}", result_letter, reflector.name));
 
                 // REVERSE. Forward Path Right > Left
                 for rot in (0..3).rev() {
                     result_letter = reverse(result_letter, my_rotors[rot].definition.clone(), offset_array[rot]);
                     if rot == 0 {
-                        my_logs.push(format!("[{}] ↢ {} ↢ {}", deb_letter, my_rotors[rot].name, result_letter));
+                        my_logs.push(format!("[{}] ↢ Rotor: {} ↢ {}", deb_letter, my_rotors[rot].name, result_letter));
                     }
                     else {
-                        my_logs.push(format!("[{}] ↢ {}", deb_letter, my_rotors[rot].name));
+                        my_logs.push(format!("[{}] ↢ Rotor: {}", deb_letter, my_rotors[rot].name));
                     }
 
                     deb_letter = result_letter;

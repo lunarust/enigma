@@ -63,7 +63,7 @@ impl Default for CipherRotor {
     fn default() -> Self {
         Self {
             id: 0,
-            name: "I Enigma I".to_string(),
+            name: "I".to_string(),
             definition: "EKMFLGDQVZNTOWYHXUSPAIBRCJ".to_string(),
             model: "Enigma I".to_string(),
             notch: ['Q'].to_vec(),

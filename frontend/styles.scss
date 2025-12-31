@@ -67,8 +67,8 @@ textarea {
 
 #content {
   position: fixed;
-  top: 40px;
-  left: 100px;
+  top: 10px;
+  left: 10px;
   width: 60%;
   padding: 20px;
   height: 100%;
@@ -78,8 +78,8 @@ textarea {
 }
 #form {
   position: fixed;
-  top: 40px;
-  left: 100px;
+  top: 10px;
+  left: 10px;
   width: 60%;
   padding: 20px;
   justify-content:space-around;
@@ -97,7 +97,7 @@ textarea {
   overflow-y : auto;
 }
 .logs_id {
-  width: 20px;
+  width: 40px;
   display: inline-block;
 }
 .logs_offset {
@@ -162,17 +162,20 @@ button[disabled]{
 
 
 .watermark {
-    color: #E0E0E0;
+    color: #818589;
     position: absolute;
     opacity: 0.25;
-    font-size: 3em;
-    width: 20%;
+    font-size: 8em;
+    width: 80%;
     text-align: right;
     z-index: 1000;
     right: 0px;
     bottom: 0px;
+    z-index: 0;
+  font-family: Noto Sans Mono;
 }
 .footer {
+
   position: fixed;
   left: 0;
   bottom: 0;
@@ -181,7 +184,7 @@ button[disabled]{
   color: #efefef;
   text-align: center;
   z-index: 0;
-    font-size: 10px;
+  font-size: 10px;
   font-family: Noto Sans Mono;
 
 }

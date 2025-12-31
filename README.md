@@ -11,6 +11,7 @@
 
 ## Issue detected:
 
+
 <details>
 
   <summary>## Issue 001: Double Stepping</summary>
@@ -47,6 +48,17 @@ Me:
 
 ```
 Issue is related to the double stepping, need to review this.
+
+</details>
+
+<details>
+
+<<summary>## Issue 002: Not correct Char in text ✔ </summary>
+
+```bash  
+thread 'tokio-runtime-worker' (205303) panicked at backend/src/punch.rs:74:36:
+assertion failed: self.is_char_boundary(n)
+```
 
 </details>
 
