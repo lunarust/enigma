@@ -76,7 +76,8 @@ pub fn Home() -> Html {
             spawn_local(async move {
 
                 let json_data = serde_json::json!({
-                    "rotor": [slow.as_ref().unwrap_or(&CipherRotor::default()),
+                    "rotor": [
+                        slow.as_ref().unwrap_or(&CipherRotor::default()),
                         medium.as_ref().unwrap_or(&CipherRotor::default()),
                         fast.as_ref().unwrap_or(&CipherRotor::default())],
                     "plain": plain,

@@ -106,6 +106,7 @@ fn move_next_through_set(set: String, current_index: i32, offset: i32) -> char {
 }
 fn move_prev_through_set(set: String, current_index: i32, offset: i32) -> char {
     let set_len: i32 = set.len().try_into().unwrap();
+
     set.chars().nth(
         ((current_index - offset + set_len) % set_len) as usize
     ).unwrap()
@@ -117,7 +118,7 @@ fn wire(character: char, rotor: String, offset: i32) -> char {
     move_prev_through_set(
         STANDARD.to_string(),
         result_letter.to_ascii_lowercase() as i32 - 97,
-         offset)
+        offset)
 }
 fn reverse(character: char, rotor: String, offset: i32) -> char {
     let result_letter = move_next_through_set(STANDARD.to_string(), STANDARD.find(character).unwrap() as i32, offset);
