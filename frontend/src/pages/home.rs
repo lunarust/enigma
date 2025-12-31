@@ -109,7 +109,7 @@ pub fn Home() -> Html {
             <h1>{ "Enigma..." }</h1>
             <span id="navigation">
             <h3>{"Rotors"}</h3>
-            <h4>{"Fast: Right position"}</h4>
+            <h4>{"FAST: Right position"}</h4>
             <RotorsDisplay
                 on_click={
                     let cb = on_rotor_select.clone();
@@ -118,7 +118,7 @@ pub fn Home() -> Html {
                 }
             />
             <hr />
-            <h4>{"Medium: Middle position"}</h4>
+            <h4>{"MEDIUM: Middle position"}</h4>
             <RotorsDisplay
                 on_click={
                     let cb = on_rotor_select.clone();
@@ -126,7 +126,7 @@ pub fn Home() -> Html {
                 }
              />
              <hr />
-             <h4>{"Slow: Left position"}</h4>
+             <h4>{"SLOW: Left position"}</h4>
              <RotorsDisplay
                 on_click={
                     let cb = on_rotor_select.clone();

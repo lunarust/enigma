@@ -12,7 +12,9 @@
 ## Issue detected:
 
 <details>
+
   <summary>## Issue 001: Double Stepping</summary>
+
 ```
 with, rotor I, II, III Enigma I
 reflector B
