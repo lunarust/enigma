@@ -8,7 +8,7 @@
 - [X] Remove special characters
 - [ ] Allow decryption
 - [ ] Add the full definition of the settings in the logs
-- [ ] Turn message to Vector
+- [X] Turn message to Vector
 
 
 ## Issue detected:
