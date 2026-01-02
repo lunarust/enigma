@@ -19,6 +19,14 @@ async fn main() {
            .and(warp::body::json())
            .and_then(solve::handle_call);
 
+
+   let unscrumble = warp::path("unscrumble");
+   let unscrumble_routes = unscrumble
+    .and(warp::post())
+    .and(warp::body::json())
+    .and_then(solve::handle_decrypt_call);
+
+
     let hello = warp::path!("hello" / String) // 3.
         .map(|name| format!("Hello, {}!", name)); // 4.
 
@@ -30,6 +38,7 @@ async fn main() {
 
 
     let routes = scrumble_routes
+    .or(unscrumble_routes)
     .or(hello)
     .with(
         warp::cors()

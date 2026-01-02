@@ -10,11 +10,14 @@ pub struct Props {
 pub fn logs_display( Props { my_logs }: &Props ) -> HtmlResult {
     Ok(
         html!{
+            <>
+            <h4>{"Full Logs:"}</h4>
+
             for fl in my_logs {
                 <span class="logs_id">{" "}{fl.idx}{" "}</span>
                 <span class="logs_offset">
                 for floff in fl.offset.clone() {
-                    {format!("{}", floff)}    
+                    {format!("{}", floff)}
                 }
                 </span>
 
@@ -23,6 +26,7 @@ pub fn logs_display( Props { my_logs }: &Props ) -> HtmlResult {
                 }
                 <br />
             }
+            </>
         }
     )
 }

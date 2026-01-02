@@ -29,7 +29,7 @@ fn tick_rotor(notches: Vec<char>, mut current_offset: i32, ticking_notch: i32) -
 }
 pub async fn decrypt(my_rotors: Vec<CipherRotor>,
     reflector: Reflector, message: String) -> (String, Vec<DebugLogs>) {
-
+        println!("Passing through ENIGMA {}", message);
         let mut offset_array: Vec<i32> = [0,0,0].to_vec();
         let mut cpt_letters = 0;
 
@@ -96,6 +96,7 @@ pub async fn decrypt(my_rotors: Vec<CipherRotor>,
             }
         }
         // Converting working vector to string
+        println!("End loop {}", message_vec.iter().cloned().collect::<String>());
         (message_vec.iter().cloned().collect::<String>(), debug_logs_list)
 }
 fn move_next_through_set(set: String, current_index: i32, offset: i32) -> char {

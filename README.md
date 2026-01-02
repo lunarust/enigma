@@ -6,8 +6,8 @@
 - [ ] Add Plugboard
 - [ ] Add Option to set rotors start position
 - [X] Remove special characters
-- [ ] Allow decryption
-- [ ] Add the full definition of the settings in the logs
+- [X] Allow decryption
+- [X] Add the full definition of the settings in the logs
 - [X] Turn message to Vector
 
 
