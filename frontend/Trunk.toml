@@ -1,6 +1,6 @@
 [serve]
 # The address to serve on LAN.
-addresses = ["127.0.0.1"]
+addresses = ["127.0.0.1","192.168.1.111"]
 # The address to serve on WAN.
 # address = "0.0.0.0"
 # The port to serve on.

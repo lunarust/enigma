@@ -4,11 +4,12 @@
 ## Todo / Could do
 - [X] Issues when my 3rd rotor ticks - identified, seems related to the double stepping effect...
 - [ ] Add Plugboard
-- [ ] Add Option to set rotors start position
+- [X] Rotors start position, matches one simulator not sure about the others
 - [X] Remove special characters
 - [X] Allow decryption
 - [X] Add the full definition of the settings in the logs
 - [X] Turn message to Vector
+- [ ] Stick your rotors in a use_state vector > home.rs
 
 
 ## Issue detected:
@@ -361,7 +362,7 @@ Final output
 
 - [Cryptii](https://cryptii.com/pipes/enigma-machine)
 - [CacheSleuth](https://www.cachesleuth.com/enigma.html)
-- [Berling Physik](https://people.physik.hu-berlin.de/~palloks/js/enigma/enigma-m4_v16_en.html)
+- [Berlin Physik](https://people.physik.hu-berlin.de/~palloks/js/enigma/enigma-m4_v16_en.html)
 - [Cryptool](https://www.cryptool.org/en/cto/enigma/)
 
 

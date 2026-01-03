@@ -1,15 +1,12 @@
 html,
 body {
-  font-size: 14px;
+  font-size: 18px;
   font-family: Noto Sans;
   color: #595959;
 }
 p {
     padding: 0px;
     marging: 0px;
-}
-iframe {
-  border: thin;
 }
 ul, li {
   max-height : 120px;
@@ -21,78 +18,59 @@ ul {
   list-style-type: none;
 }
 li {
+  font-size: 14px;
   cursor: pointer;
   width: 100%;
-  margin-left: 0px;
-  margin-top: 0px;
   padding-left: 0px;
   list-style-type: none;
   align: left;
   display: block;
-
 }
 li:hover{
-    color: #DCDCDC;
-    background-color:  #36454F;
-    box-shadow:0 8px 16px 0 rgba(0,0,0,0.6);
+  color: #DCDCDC;
+  background-color:  #36454F;
+  box-shadow:0 8px 16px 0 rgba(0,0,0,0.6);
 }
 textarea {
- max-height: 400px;
- max-width: 400px;
- min-height: 200px;
- min-width: 400px;
+ max-height: 180px;
+ max-width: 280px;
+ min-height: 80px;
+ min-width: 260px;
 }
- input[type=text] {
-  width: 100%;
+input[type=text] {
   padding: 12px;
   margin: 10px 0;
   box-sizing: border-box;
+  text-align: center;
+}
+h3, h4 {
+  margin: 1px;
+  padding: 1px;
+}
+.start_letter{
+  width: 30px;
 }
 .selected {
   font-weight: bolder;
 }
-.top{
-  position: fixed;
-  left: 600px;
-  top: 10px;
-  padding-left: 30px;
-}
-.title{
-    padding-left: 30px;
-    padding-right: 30px;
-    top: 0px;
-    font-weight: bolder;
-    font-size: 16px;
-}
-
 #content {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  width: 60%;
-  padding: 20px;
-  height: 100%;
+  position: relative;
+  width: 80%;
   display: block;
-//  justify-content:space-around;
-//  display: flex;
 }
 #form {
-  position: fixed;
-  top: 10px;
-  left: 10px;
+  position: relative;
   width: 60%;
   padding: 20px;
   justify-content:space-around;
-  display: block;//flex;
+  display: flex; //block;//
 }
 #logs {
-  //display:table;
+  width: 80%;
   position: relative;
-  top: 280px;
   max-height: 450px;
-  display:table ;
   font-family: Noto Sans Mono;
-  font-size: 10px;
+  font-size: 14px;
   display: block;
   overflow-y : auto;
 }
@@ -106,11 +84,10 @@ textarea {
 }
 
 #actions {
-  padding: 10px;
-  margin: 10px;
+  padding: 5px;
+  margin: 5px;
   position: relative;
   display: table;
-  //position: relative;
   justify-content: center;
 }
 
@@ -119,10 +96,8 @@ textarea {
   top: 0px;
   right: 0px;
   width:320px;
-  align-items: left;
-  align: left;
   text-align: left;
-  padding: 20px;
+  //padding: 5px;
 }
 
 button  {
@@ -131,7 +106,7 @@ button  {
   border-width: 0;
   cursor: pointer;
   display: inline-block;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 24px;
   list-style: none;
@@ -159,23 +134,20 @@ button[disabled]{
   background-color: #transparent;
   color: #efefef;
 }
-
-
 .watermark {
     color: #818589;
     position: absolute;
     opacity: 0.25;
-    font-size: 8em;
-    width: 80%;
-    text-align: right;
+    font-size: 4em;
+    width: 100%;
+    text-align: left;
     z-index: 1000;
     right: 0px;
     bottom: 0px;
     z-index: 0;
-  font-family: Noto Sans Mono;
+    font-family: Noto Sans Black;
 }
 .footer {
-
   position: fixed;
   left: 0;
   bottom: 0;
@@ -186,5 +158,11 @@ button[disabled]{
   z-index: 0;
   font-size: 10px;
   font-family: Noto Sans Mono;
+}
 
+@media (max-width:1024px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */
+  body, main, #main { grid: initial; display: flow;}
+  #content  {grid-area: 1 / span 6; top: auto;}
+  #logs { grid-area: 2 / span 1 }
+   .navigation { grid-area: 1 / span 2; }
 }

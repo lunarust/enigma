@@ -30,7 +30,6 @@ pub fn rotor_display( ShowListProps { on_click }: &ShowListProps ) -> HtmlResult
         html!{
             <ul>
             for cr in rotors_all {
-
                 if cr.id == selected_rotor_id.unwrap_or(0) {
                     <li key={cr.id}
                         class="selected"
@@ -45,7 +44,6 @@ pub fn rotor_display( ShowListProps { on_click }: &ShowListProps ) -> HtmlResult
                     >
                     { format!("{} - {}", &cr.model, &cr.name) }
                     </li>
-
                 }
             }
             </ul>

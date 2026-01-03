@@ -83,6 +83,7 @@ pub struct Ciphertext {
     pub plain: String,
     pub cryptic: String,
     pub reflector: Reflector,
+    pub start_position: Vec<String>,
 }
 impl Ciphertext {
     pub fn of(ciphertext: Ciphertext) -> Ciphertext {
@@ -91,6 +92,7 @@ impl Ciphertext {
             plain: ciphertext.plain,
             cryptic: ciphertext.cryptic,
             reflector: ciphertext.reflector,
+            start_position: ciphertext.start_position,
         }
     }
 }

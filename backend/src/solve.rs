@@ -21,7 +21,7 @@ pub async fn handle_call(body: Ciphertext) -> Result<impl Reply, warp::Rejection
 
     //println!("Clean text: {}", t);
 
-    let (output, debug_logs_list) = punch::decrypt(body.rotor.clone(), body.reflector.clone(), t).await;
+    let (output, debug_logs_list) = punch::decrypt(body.rotor.clone(), body.reflector.clone(), t, body.start_position).await;
 
     Ok(json(
         &Response {
@@ -37,7 +37,7 @@ pub async fn handle_decrypt_call(body: Ciphertext) -> Result<impl Reply, warp::R
     //let t = body.plain.clone().replace(|c: char| !c.is_ascii(), "");
     let t = body.cryptic.to_lowercase().clone().replace(|c: char| !c.is_alphabetic(), "");
 
-    let (output, debug_logs_list) = punch::decrypt(body.rotor.clone(), body.reflector.clone(), t).await;
+    let (output, debug_logs_list) = punch::decrypt(body.rotor.clone(), body.reflector.clone(), t, body.start_position).await;
 
     Ok(json(
         &Response {
