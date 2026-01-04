@@ -50,6 +50,9 @@ h3, h4 {
 .start_letter{
   width: 30px;
 }
+.plugboard {
+  width: 80px;
+}
 .selected {
   font-weight: bolder;
 }
@@ -68,7 +71,7 @@ h3, h4 {
 #logs {
   width: 80%;
   position: relative;
-  max-height: 450px;
+  max-height: 650px;
   font-family: Noto Sans Mono;
   font-size: 14px;
   display: block;
@@ -140,8 +143,8 @@ button[disabled]{
     opacity: 0.25;
     font-size: 4em;
     width: 100%;
-    text-align: left;
-    z-index: 1000;
+    text-align: right;
+    z-index: 0;
     right: 0px;
     bottom: 0px;
     z-index: 0;

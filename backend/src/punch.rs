@@ -1,5 +1,5 @@
 use common::*;
-const STANDARD: &str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const STANDARD: &str = "abcdefghijklmnopqrstuvwxyz";
 
 
 fn tick_rotor(notches: Vec<char>, mut current_offset: i32, ticking_notch: i32) -> (i32, bool) {
@@ -27,14 +27,27 @@ fn tick_rotor(notches: Vec<char>, mut current_offset: i32, ticking_notch: i32) -
     }
     (current_offset, ticked)
 }
+fn plugboard_swich(c: char, plugboard: String) -> char {
+    let mut res: char = c;
+    for w in plugboard.split_whitespace() {
+        let pos = w.find(c);
+
+        if pos != None {
+            if pos == Some(1) { res = w.as_bytes()[0] as char; }
+            else { res = w.as_bytes()[1] as char; }
+        }
+    }
+    res
+}
+
 pub async fn decrypt(my_rotors: Vec<CipherRotor>,
     reflector: Reflector, message: String,
-    start_position: Vec<String>) -> (String, Vec<DebugLogs>) {
+    start_position: Vec<String>, plugboard: String) -> (String, Vec<DebugLogs>) {
         //println!("Passing through ENIGMA {}", message);
         let mut offset_array: Vec<i32> = [
-            STANDARD.to_ascii_lowercase().find(&start_position[0].to_lowercase()).unwrap_or_else(|| 0) as i32,
-            STANDARD.to_ascii_lowercase().find(&start_position[1].to_lowercase()).unwrap_or_else(|| 0) as i32,
-            STANDARD.to_ascii_lowercase().find(&start_position[2].to_lowercase()).unwrap_or_else(|| 0) as i32].to_vec();
+            STANDARD.find(&start_position[0].to_lowercase()).unwrap_or_else(|| 0) as i32,
+            STANDARD.find(&start_position[1].to_lowercase()).unwrap_or_else(|| 0) as i32,
+            STANDARD.find(&start_position[2].to_lowercase()).unwrap_or_else(|| 0) as i32].to_vec();
         let mut cpt_letters = 0;
 
         let mut debug_logs_list: Vec<DebugLogs> = vec![];
@@ -44,29 +57,35 @@ pub async fn decrypt(my_rotors: Vec<CipherRotor>,
 
             // Ignore punctuations, special characters & non standard alphabet
             if current_letter.is_alphabetic() &&
-                STANDARD.to_ascii_lowercase().find(*current_letter) != None {
+                STANDARD.find(*current_letter) != None {
                 let mut ticked = false;
                 let mut my_logs: Vec<String> = vec![];
 
+                // Ticking fast rotor
                 (offset_array[0], ticked) = tick_rotor(vec![], offset_array[0], 1);
 
                 let mut result_letter = *current_letter;
                 let mut deb_letter = result_letter;
 
+                // Check if we have to swap the letter with the plugboard
+                result_letter = plugboard_swich(result_letter, plugboard.clone());
+                my_logs.push(format!("[{}] - Plugboard - [{}]", deb_letter, result_letter));
+                //println!("[{}] - Plugboard - [{}]", deb_letter, result_letter);
+
                 // WIRING. Forward Path Right > Left
                 for rot in 0..3 {
-                    result_letter = wire(result_letter, my_rotors[rot].definition.clone(), offset_array[rot]);
+                    result_letter = wire(result_letter, my_rotors[rot].definition.to_lowercase().clone(), offset_array[rot]);
                     my_logs.push(format!("[{}] ↣ Rotor: {}", deb_letter, my_rotors[rot].name));
                     deb_letter = result_letter;
                  }
 
                 // Matching with Reflector
-                result_letter = reflector.definition.chars().nth(STANDARD.find(result_letter).unwrap()).unwrap();
+                result_letter = reflector.definition.to_lowercase().chars().nth(STANDARD.find(result_letter).unwrap()).unwrap();
                 my_logs.push(format!("[{}] ⟲ {}", result_letter, reflector.name));
 
                 // REVERSE. Forward Path Right > Left
                 for rot in (0..3).rev() {
-                    result_letter = reverse(result_letter, my_rotors[rot].definition.clone(), offset_array[rot]);
+                    result_letter = reverse(result_letter, my_rotors[rot].definition.to_lowercase().clone(), offset_array[rot]);
                     if rot == 0 {
                         my_logs.push(format!("[{}] ↢ Rotor: {} ↢ {}", deb_letter, my_rotors[rot].name, result_letter));
                     }
@@ -76,6 +95,11 @@ pub async fn decrypt(my_rotors: Vec<CipherRotor>,
 
                     deb_letter = result_letter;
                }
+                // Check if we have to swap the letter with the plugboard
+                deb_letter = result_letter;
+                result_letter = plugboard_swich(result_letter, plugboard.clone());
+                my_logs.push(format!("[{}] - Plugboard - [{}]", deb_letter, result_letter));
+
 
                // replacing the character back into the vector
                message_vec[loop_char] = result_letter;

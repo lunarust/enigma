@@ -17,7 +17,7 @@ pub fn Home() -> Html {
     let message = use_state(|| "".to_string());
     let full_logs = use_state(|| None);
     let full_conf = use_state(|| None);
-
+    let plugboard_state = use_state(|| "".to_string());
     let resp_state = use_state(|| (
         "".to_string(),
         "".to_string()
@@ -60,7 +60,9 @@ pub fn Home() -> Html {
     let full_logs = full_logs.clone();
     let full_conf = full_conf.clone();
 
+
     let get_responses = {
+        let plugboard_state = plugboard_state.clone();
         let resp_state = resp_state.clone();
         let message = message.clone();
         let full_logs = full_logs.clone();
@@ -77,12 +79,13 @@ pub fn Home() -> Html {
 
             let message = message.clone();
             let (plain, cryptic) = (*resp_state).clone();
+            let plugboard = plugboard_state.clone();
             let resp_state = resp_state.clone();
             let full_logs = full_logs.clone();
             let full_conf = full_conf.clone();
 
             spawn_local(async move {
-                info!("MATCH {}", check);
+                //info!("MATCH {}", check);
 
                 let plop: common::Ciphertext = common::Ciphertext{
                     rotor:
@@ -93,6 +96,7 @@ pub fn Home() -> Html {
                     ],
                      plain: plain,
                      cryptic: cryptic,
+                     plugboard: plugboard.to_string(),
                      reflector: refl.as_ref().unwrap_or(&Reflector::default()).clone(),
                      start_position: vec![start_state.0.clone(), start_state.1.clone(), start_state.2.clone()]
 
@@ -134,7 +138,7 @@ pub fn Home() -> Html {
                     //cb.reform(|rotor| (RotorPos::Slow, rotor))
                 }
             />
-            {"Start position:   "} 
+            {"Start position:   "}
             <input value={rotor_start_state.0.clone()} //{oninput}
                 oninput={Callback::from({
                 let rotor_start_state = rotor_start_state.clone();
@@ -187,12 +191,25 @@ pub fn Home() -> Html {
                 maxlength="1"
                 class="start_letter"
                 key="slow_start" />
-
              <hr />
              <h3>{"Reflector:"}</h3>
              <ReflectorDisplay
                 on_click={on_reflector_select}
              />
+             <h3>{"Plugboard"}
+                <input //value={plugboard_state.clone()}
+                oninput={Callback::from({
+                let plugboard_state = plugboard_state.clone();
+                move |e: InputEvent| {
+                    let input = e.target_dyn_into::<web_sys::HtmlInputElement>().unwrap();
+                    plugboard_state.set(input.value());
+                }
+                })}
+                maxlength="15"
+                class="plugboard"
+                />
+                { "  " }
+                </h3>
              </span>
 
              <div id="content">

@@ -3,7 +3,7 @@
 
 ## Todo / Could do
 - [X] Issues when my 3rd rotor ticks - identified, seems related to the double stepping effect...
-- [ ] Add Plugboard
+- [X] Add Plugboard
 - [X] Rotors start position, matches one simulator not sure about the others
 - [X] Remove special characters
 - [X] Allow decryption

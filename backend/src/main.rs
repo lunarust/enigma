@@ -1,9 +1,5 @@
-#[macro_use]
 extern crate lazy_static;
-use warp::{
-    http::{header, Method},
-    Filter, Rejection,
-};
+use warp::{http::Method, Filter};
 
 mod solve;
 mod punch;
@@ -29,12 +25,6 @@ async fn main() {
 
     let hello = warp::path!("hello" / String) // 3.
         .map(|name| format!("Hello, {}!", name)); // 4.
-
-
-    let route = warp::method()
-        .map(|method| {
-            format!("You sent a {} request!", method)
-    });
 
 
     let routes = scrumble_routes
