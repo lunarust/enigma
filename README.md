@@ -379,5 +379,6 @@ Final output
 > All done mostly to learn & play with Rust... (⌒‿⌒)/
 
 
+[![Rust](https://github.com/lunarust/enigma/actions/workflows/rust.yml/badge.svg)](https://github.com/lunarust/enigma/actions/workflows/rust.yml)
 
 [![License: WTFPL](https://upload.wikimedia.org/wikipedia/commons/f/fa/WTFPL_badge.png)](/LICENSE.txt)
