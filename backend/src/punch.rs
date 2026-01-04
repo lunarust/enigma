@@ -49,7 +49,7 @@ pub async fn decrypt(my_rotors: Vec<CipherRotor>,
 
                     my_logs.push(format!("Rotor: {} ↢ [{}]",my_rotors[rot].name, result_letter));
 
-                    deb_letter = result_letter;
+                    //deb_letter = result_letter;
                }
 
                 // PLUGBOARD. Check if we have one defined

@@ -384,6 +384,22 @@ Final output
 - [Code & ciphers #ex](https://www.codesandciphers.org.uk/enigma/example1.htm)
 
 
+### Potential new pet project...
+
+“Why crypto breaks” micro-lab
+
+Build minimal demos of famous failures:
+
+Caesar with frequency attack
+
+Vigenère with Kasiski
+
+Enigma with known plaintext
+
+Each demo ≤ 100 lines.
+Great closure to the Enigma arc.
+
+
 > [!NOTE]
 > All done mostly to learn & play with Rust... (⌒‿⌒)/
 
