@@ -256,7 +256,16 @@ curl -v --request OPTIONS 'http://127.0.0.1:9000' -H 'Origin: http://localhost/s
 </details>
 
 ## Rotors notches specs
-(see wikipedia page, link in footnotes)
+
+```
+INPUT		A	B	C	D	E	F	G	H	I	J	K	L	M	N	O	P	Q	R	S	T	U	V	W	X	Y	Z
+Rotor I		E	K	M	F	L	G	D	Q	V	Z	N	T	O	W	Y	H	X	U	S	P	A	I	B	R	C	J
+Rotor II	A	J	D	K	S	I	R	U	X	B	L	H	W	T	M	C	Q	G	Z	N	P	Y	F	V	O	E
+Rotor III	B	D	F	H	J	L	C	P	R	T	X	V	Z	N	Y	E	I	W	G	A	K	M	U	S	Q	O
+Rotor IV	E	S	O	V	P	Z	J	A	Y	Q	U	I	R	H	X	L	N	F	T	G	K	D	C	M	W	B
+Rotor V		V	Z	B	R	G	I	T	Y	U	P	S	D	N	H	L	X	A	W	M	J	Q	O	F	E	C	K
+```
+
 
 | Rotor         | Notch         | Effect        |
 | ------------- | ------------- | ------------- |
@@ -267,13 +276,14 @@ curl -v --request OPTIONS 'http://127.0.0.1:9000' -H 'Origin: http://localhost/s
 |V|Z|If rotor steps from Z to A, the next rotor is advanced|
 |VI, VII, VIII|Z+M|If rotor steps from Z to A, or from M to N the next rotor is advanced|
 
+(see wikipedia page, link in footnotes)
 
 
 <details>
 
   <summary>Full journey of a letter</summary>
 
-### Enigma I
+## Enigma I
 
 Configuration (fixed)
 Left rotor: III — BDFHJLCPRTXVZNYEIWGAKMUSQO
@@ -283,7 +293,7 @@ Reflector: B — YRUHQSLDPXNGOKMIEBFZCWVJAT
 Ring settings: A A A
 Plugboard: none
 
-#### Rotor positions
+### Rotor positions
 | Rotor       | Before key | After stepping |
 | ----------- | ---------- | -------------- |
 | Left (III)  | A          | A              |
@@ -295,7 +305,7 @@ Letter mappings (A=0 … Z=25)
 | ----------- | ------ | ----- |
 | Key pressed | W      | 22    |
 
-#### Forward path (right → left)
+### Forward path (right → left)
 🔹 Right Rotor — I (pos B, offset +1)
 | Operation         | Value      |
 | ----------------- | ---------- |
@@ -321,7 +331,7 @@ Reflector
 | ----- | ---------- |
 | I (8) | **P (15)** |
 
-#### Reverse path (left → right)
+### Reverse path (left → right)
 🔹 Left Rotor — III (reverse wiring)
 | Operation     | Value     |
 | ------------- | --------- |
