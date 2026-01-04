@@ -44,9 +44,7 @@ async fn main() {
                 Method::PATCH,
                 Method::DELETE,
             ])
-            .allow_headers(vec!["allow_origin", "allow_any_origin", "Access-Control-Allow-Origin",
-                "Referer", "Control-Request-Headers", "Content-Type"])
-            //        .allow_headers(vec!["Access-Control-Allow-Origin", "Origin", "Accept", "X-Requested-With", "Content-Type"])
+            .allow_headers(vec!["allow_origin", "allow_any_origin", "Access-Control-Allow-Origin", "Referer", "Control-Request-Headers", "Content-Type"])
             .max_age(300)
             .allow_any_origin(),
     );

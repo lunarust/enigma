@@ -85,8 +85,6 @@ pub fn Home() -> Html {
             let full_conf = full_conf.clone();
 
             spawn_local(async move {
-                //info!("MATCH {}", check);
-
                 let plop: common::Ciphertext = common::Ciphertext{
                     rotor:
                         vec![
@@ -196,7 +194,8 @@ pub fn Home() -> Html {
              <ReflectorDisplay
                 on_click={on_reflector_select}
              />
-             <h3>{"Plugboard"}
+             <hr />
+             <h3>{"Plugboard:     "}
                 <input //value={plugboard_state.clone()}
                 oninput={Callback::from({
                 let plugboard_state = plugboard_state.clone();
