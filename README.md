@@ -9,7 +9,6 @@
 - [X] Allow decryption
 - [X] Add the full definition of the settings in the logs
 - [X] Turn message to Vector
-- [ ] Stick your rotors in a use_state vector > home.rs
 
 
 ## Issue detected:
@@ -17,7 +16,7 @@
 
 <details>
 
-  <summary>## Issue 001: Double Stepping</summary>
+  <summary>## Issue 001: Double Stepping ✔ </summary>
 
 ```
 with, rotor I, II, III Enigma I

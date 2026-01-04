@@ -7,7 +7,7 @@ use crate::pages::rotors::RotorsDisplay;
 use crate::pages::reflector::ReflectorDisplay;
 use crate::pages::logs::LogsDisplay;
 use crate::pages::configuration::ConfigurationDisplay;
-use log::info;
+//use log::info;
 
 //#[derive(Clone, Copy, PartialEq)]
 //enum RotorPos { Slow, Medium, Fast }

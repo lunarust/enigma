@@ -1,17 +1,7 @@
-use serde::{Deserialize, Serialize};
 use warp::{reply::json, Reply};
 
 use common::*;
 use crate::punch;
-
-#[derive(Debug, Serialize, Deserialize)]
-#[allow(non_snake_case)]
-struct Solve {
-    rotor: Vec<i32>,
-    plain: String,
-    cryptic: String,
-    reflector: String,
-}
 
 pub async fn handle_call(body: Ciphertext) -> Result<impl Reply, warp::Rejection>  {
 

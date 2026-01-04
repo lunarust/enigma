@@ -13,24 +13,24 @@ pub async fn decrypt(my_rotors: Vec<CipherRotor>,
         let mut cpt_letters = 0;
         let mut debug_logs_list: Vec<DebugLogs> = vec![];
         let mut message_vec: Vec<char> = message.chars().collect();
+        let mut ticked = [false, false, false];
 
         for (loop_char, current_letter) in message_vec.clone().iter().enumerate() {
-
             // Ignore punctuations, special characters & non standard alphabet
             if current_letter.is_alphabetic() &&
                 STANDARD.find(*current_letter) != None {
-                let mut ticked = false;
+
                 let mut my_logs: Vec<String> = vec![];
 
                 // Ticking fast rotor
-                (offset_array[0], ticked) = tick_rotor(vec![], offset_array[0], 1);
+                (offset_array[0], ticked[0]) = tick_rotor(vec![], offset_array[0], 1);
 
                 let mut result_letter = *current_letter;
                 let mut deb_letter = result_letter;
 
                 // Check if we have to swap the letter with the plugboard
                 result_letter = plugboard_swich(result_letter, plugboard.clone());
-                my_logs.push(format!("[{}] - Plugboard - [{}]", deb_letter, result_letter));
+                my_logs.push(format!("[{}] - Plugboard ", deb_letter));
 
                 // WIRING. Forward Path Right > Left
                 for rot in 0..3 {
@@ -46,12 +46,9 @@ pub async fn decrypt(my_rotors: Vec<CipherRotor>,
                 // REVERSE. Forward Path Right > Left
                 for rot in (0..3).rev() {
                     result_letter = reverse(result_letter, my_rotors[rot].definition.to_lowercase().clone(), offset_array[rot]);
-                    if rot == 0 {
-                        my_logs.push(format!("[{}] ↢ Rotor: {} ↢ {}", deb_letter, my_rotors[rot].name, result_letter));
-                    }
-                    else {
-                        my_logs.push(format!("[{}] ↢ Rotor: {}", deb_letter, my_rotors[rot].name));
-                    }
+
+                    my_logs.push(format!("Rotor: {} ↢ [{}]",my_rotors[rot].name, result_letter));
+
                     deb_letter = result_letter;
                }
 
@@ -71,14 +68,22 @@ pub async fn decrypt(my_rotors: Vec<CipherRotor>,
                 }
 
                 debug_logs_list.push(
-                    common::DebugLogs {
-                    idx: cpt_letters,
-                    offset: offset_char.clone(),
-                    pass: my_logs}
+                    common::DebugLogs { idx: cpt_letters, offset: offset_char.clone(), pass: my_logs}
                 );
+
+
+                if ticked[1] {
+                    (offset_array[2], ticked[2]) = tick_rotor(my_rotors[1].notch.clone(), offset_array[2], offset_array[1]);
+                }
+
                 // Check medium & slow rotors only if we already ticked with the previous one
-                if ticked { (offset_array[1], ticked) = tick_rotor(my_rotors[0].notch.clone(), offset_array[1], offset_array[0])};
-                if ticked { offset_array[2] = tick_rotor(my_rotors[1].notch.clone(), offset_array[2], offset_array[1]).0};
+                // must tick middle rotor if the slow motor ticked
+                if ticked[0] {
+                    (offset_array[1], ticked[1]) = tick_rotor(my_rotors[0].notch.clone(), offset_array[1], offset_array[0]);
+                    if ticked[2] {
+                        (offset_array[1], ticked[1]) = tick_rotor(vec![], offset_array[1], offset_array[0]);
+                    };
+                };
 
                 cpt_letters += 1;
             }

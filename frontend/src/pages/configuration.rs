@@ -12,7 +12,7 @@ pub fn configuration_display( Props { my_conf }: &Props ) -> HtmlResult {
         html!{
             <span class="configuration">
             <h4>{"Selected configuration:"}</h4>
-            for element in my_conf.rotor.clone() {
+            for element in my_conf.rotor.clone().into_iter().rev() {
                  { format!("Model: {}, Name: {}, Definition: {} Notch:{:?}",
                      element.model, element.name, element.definition, element.notch) }<br />
             }

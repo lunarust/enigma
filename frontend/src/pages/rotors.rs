@@ -1,5 +1,5 @@
 use yew::prelude::*;
-use log::info;
+//use log::info;
 use common::*;
 
 #[derive(Properties, PartialEq)]
