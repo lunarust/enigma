@@ -1,5 +1,9 @@
 # Enigma
 
+Just a simulator build as a pet project to work with Yew & Rust.
+
+Note: I have little interest in css, so the presentation of the frontend is not fancy, not at all.
+
 
 ## Todo / Could do
 - [X] Issues when my 3rd rotor ticks - identified, seems related to the double stepping effect...
@@ -64,14 +68,26 @@ assertion failed: self.is_char_boundary(n)
 
 </details>
 
-## RunIt
+
+## Run the project
+
+[First, get started with Rust](https://rust-lang.org/learn/get-started/)
+
 
 ### Backend
+
+Listens on port 9000.
+
 ```bash
+cd ~/backend
 make dev
 ```
 ### Frontend
+
+Listens on port 8000.
+
 ```bash
+cd ~/frontend
 trunk serve
 ```
 
@@ -83,7 +99,8 @@ trunk serve
 
 curl --location 'localhost:9000/scrumble' \
 --header 'Content-Type: application/json' \
---data '{"cryptic":"","plain":"welcome","reflector":{"definition":"YRUHQSLDPXNGOKMIEBFZCWVJAT","id":4,"model":"M3","name":"Reflector B"},"rotor":[{"definition":"EKMFLGDQVZNTOWYHXUSPAIBRCJ","id":0,"model":"Enigma I","name":"I Enigma I","notch":["Q"]},{"definition":"AJDKSIRUXBLHWTMCQGZNPYFVOE","id":1,"model":"Enigma I","name":"II Enigma I","notch":["E"]},{"definition":"BDFHJLCPRTXVZNYEIWGAKMUSQO","id":2,"model":"Enigma I","name":"III Enigma I","notch":["V"]}]}'
+--data '{"rotor":[{"id":0,"name":"I","definition":"EKMFLGDQVZNTOWYHXUSPAIBRCJ","model":"Enigma I","notch":["Q"]},{"id":1,"name":"II","definition":"AJDKSIRUXBLHWTMCQGZNPYFVOE","model":"Enigma I","notch":["E"]},{"id":2,"name":"III","definition":"BDFHJLCPRTXVZNYEIWGAKMUSQO","model":"Enigma I","notch":["V"]}],"plain":"hello","cryptic":"","reflector":{"id":4,"name":"Reflector B","definition":"YRUHQSLDPXNGOKMIEBFZCWVJAT","model":"M3"},"start_position":["A","A","A"],"plugboard":""}'
+
 
 ```
 
@@ -92,126 +109,102 @@ curl --location 'localhost:9000/scrumble' \
 
 ```yaml
 {
-    "plain": "welcome",
-    "cryptic": "BFNLZKH",
+    "plain": "hello",
+    "cryptic": "mfncz",
     "debug_logs": [
         {
             "idx": 0,
             "offset": [
-                "B",
-                "A",
-                "A"
+                "b",
+                "a",
+                "a"
             ],
             "pass": [
-                "[w] ↣ I Enigma I",
-                "[Q] ↣ II Enigma I",
-                "[Q] ↣ III Enigma I",
-                "[I] ⟲ Reflector B",
-                "[I] ↢ III Enigma I",
-                "[H] ↢ II Enigma I",
-                "[L] ↢ I Enigma I ↢ B"
+                "[h] - Plugboard ",
+                "[h] ↣ Rotor: I",
+                "[u] ↣ Rotor: II",
+                "[p] ↣ Rotor: III",
+                "[q] ⟲ Reflector B",
+                "Rotor: III ↢ [y]",
+                "Rotor: II ↢ [v]",
+                "Rotor: I ↢ [m]",
+                "[m] - Plugboard - [m]"
             ]
         },
         {
             "idx": 1,
             "offset": [
-                "C",
-                "A",
-                "A"
+                "c",
+                "a",
+                "a"
             ],
             "pass": [
-                "[e] ↣ I Enigma I",
-                "[B] ↣ II Enigma I",
-                "[J] ↣ III Enigma I",
-                "[T] ⟲ Reflector B",
-                "[T] ↢ III Enigma I",
-                "[M] ↢ II Enigma I",
-                "[O] ↢ I Enigma I ↢ F"
+                "[e] - Plugboard ",
+                "[e] ↣ Rotor: I",
+                "[b] ↣ Rotor: II",
+                "[j] ↣ Rotor: III",
+                "[z] ⟲ Reflector B",
+                "Rotor: III ↢ [m]",
+                "Rotor: II ↢ [o]",
+                "Rotor: I ↢ [f]",
+                "[f] - Plugboard - [f]"
             ]
         },
         {
             "idx": 2,
             "offset": [
-                "D",
-                "A",
-                "A"
+                "d",
+                "a",
+                "a"
             ],
             "pass": [
-                "[l] ↣ I Enigma I",
-                "[V] ↣ II Enigma I",
-                "[Y] ↣ III Enigma I",
-                "[Q] ⟲ Reflector B",
-                "[Q] ↢ III Enigma I",
-                "[P] ↢ II Enigma I",
-                "[U] ↢ I Enigma I ↢ N"
+                "[l] - Plugboard ",
+                "[l] ↣ Rotor: I",
+                "[v] ↣ Rotor: II",
+                "[y] ↣ Rotor: III",
+                "[e] ⟲ Reflector B",
+                "Rotor: III ↢ [p]",
+                "Rotor: II ↢ [u]",
+                "Rotor: I ↢ [n]",
+                "[n] - Plugboard - [n]"
             ]
         },
         {
             "idx": 3,
             "offset": [
-                "E",
-                "A",
-                "A"
+                "e",
+                "a",
+                "a"
             ],
             "pass": [
-                "[c] ↣ I Enigma I",
-                "[Z] ↣ II Enigma I",
-                "[E] ↣ III Enigma I",
-                "[J] ⟲ Reflector B",
-                "[J] ↢ III Enigma I",
-                "[K] ↢ II Enigma I",
-                "[D] ↢ I Enigma I ↢ L"
+                "[l] - Plugboard ",
+                "[l] ↣ Rotor: I",
+                "[d] ↣ Rotor: II",
+                "[k] ↣ Rotor: III",
+                "[j] ⟲ Reflector B",
+                "Rotor: III ↢ [e]",
+                "Rotor: II ↢ [z]",
+                "Rotor: I ↢ [c]",
+                "[c] - Plugboard - [c]"
             ]
         },
         {
             "idx": 4,
             "offset": [
-                "F",
-                "A",
-                "A"
+                "f",
+                "a",
+                "a"
             ],
             "pass": [
-                "[o] ↣ I Enigma I",
-                "[K] ↣ II Enigma I",
-                "[L] ↣ III Enigma I",
-                "[V] ⟲ Reflector B",
-                "[V] ↢ III Enigma I",
-                "[R] ↢ II Enigma I",
-                "[G] ↢ I Enigma I ↢ Z"
-            ]
-        },
-        {
-            "idx": 5,
-            "offset": [
-                "G",
-                "A",
-                "A"
-            ],
-            "pass": [
-                "[m] ↣ I Enigma I",
-                "[M] ↣ II Enigma I",
-                "[W] ↣ III Enigma I",
-                "[U] ⟲ Reflector B",
-                "[U] ↢ III Enigma I",
-                "[G] ↢ II Enigma I",
-                "[R] ↢ I Enigma I ↢ K"
-            ]
-        },
-        {
-            "idx": 6,
-            "offset": [
-                "H",
-                "A",
-                "A"
-            ],
-            "pass": [
-                "[e] ↣ I Enigma I",
-                "[M] ↣ II Enigma I",
-                "[W] ↣ III Enigma I",
-                "[U] ⟲ Reflector B",
-                "[U] ↢ III Enigma I",
-                "[G] ↢ II Enigma I",
-                "[R] ↢ I Enigma I ↢ H"
+                "[o] - Plugboard ",
+                "[o] ↣ Rotor: I",
+                "[k] ↣ Rotor: II",
+                "[l] ↣ Rotor: III",
+                "[w] ⟲ Reflector B",
+                "Rotor: III ↢ [r]",
+                "Rotor: II ↢ [g]",
+                "Rotor: I ↢ [z]",
+                "[z] - Plugboard - [z]"
             ]
         }
     ]
@@ -384,20 +377,14 @@ Final output
 - [Code & ciphers #ex](https://www.codesandciphers.org.uk/enigma/example1.htm)
 
 
-### Potential new pet project...
-
-“Why crypto breaks” micro-lab
-
-Build minimal demos of famous failures:
-
-Caesar with frequency attack
-
-Vigenère with Kasiski
-
-Enigma with known plaintext
-
-Each demo ≤ 100 lines.
-Great closure to the Enigma arc.
+> [!TIP] Potential new pet project...
+> Why crypto breaks” micro-lab
+> Build minimal demos of famous failures:
+> Caesar with frequency attack
+> Vigenère with Kasiski
+> Enigma with known plaintext
+> Each demo ≤ 100 lines.
+> Great closure to the Enigma arc.
 
 
 > [!NOTE]
