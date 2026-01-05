@@ -377,7 +377,8 @@ Final output
 - [Code & ciphers #ex](https://www.codesandciphers.org.uk/enigma/example1.htm)
 
 
-> [!TIP] Potential new pet project...
+> [!TIP]
+> Potential new pet project...
 > Why crypto breaks” micro-lab
 > Build minimal demos of famous failures:
 > Caesar with frequency attack
