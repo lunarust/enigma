@@ -1,0 +1,22 @@
+services:
+  enigma_backend:
+    image: enigma_be:latest
+    container_name: enigma_backend
+    ports:
+      - 9000:9000
+    restart: unless-stopped
+    networks:
+      - enigma_nw
+
+  enigma_frontend:
+    image: enigma_fe:latest
+    container_name: enigma_frontend
+    ports:
+      - 8000:8000
+    restart: unless-stopped
+    networks:
+    - enigma_nw
+
+networks:
+  enigma_nw:
+    external: true

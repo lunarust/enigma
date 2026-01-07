@@ -31,18 +31,15 @@ async fn main() {
     .or(unscrumble_routes)
     .or(hello)
     .with(
-        warp::cors()
+        warp::cors()//.allow_any_origin()
             .allow_origin("http://localhost")
-            .allow_origin("http://aetes")
+            //.allow_origin("http://enigma_frontend")
+            .allow_origin("http://aetes.greece.local")
             .allow_methods(&[
                 Method::OPTIONS,
                 Method::GET,
                 Method::POST,
-                Method::DELETE,
-                Method::PUT,
                 Method::HEAD,
-                Method::PATCH,
-                Method::DELETE,
             ])
             .allow_headers(vec!["allow_origin", "allow_any_origin", "Access-Control-Allow-Origin", "Referer", "Control-Request-Headers", "Content-Type"])
             .max_age(300)

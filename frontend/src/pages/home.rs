@@ -69,7 +69,7 @@ pub fn Home() -> Html {
         let full_conf = full_conf.clone();
 
         Callback::from(move |direction: &str| {
-            let check = format!("/api/v1/{}", direction);
+            let check = format!("http://localhost:9000/{}", direction);
 
             let refl = refl.clone();
             let slow = slow.clone();

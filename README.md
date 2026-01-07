@@ -215,6 +215,13 @@ curl --location 'localhost:9000/scrumble' \
 
 ```bash
 curl -v --request OPTIONS 'http://127.0.0.1:8000' -H 'Origin: http://aetes.greece.local' -H 'Access-Control-Request-Method: GET'
+
+curl -v --request OPTIONS 'http://enigma_backend:9000' -H 'Origin: http://enigma_frontend:8000' -H 'Access-Control-Request-Method: GET'
+
+curl -v --request OPTIONS 'http://enigma_frontend:8000' -H 'Origin: http://enigma_backend:9000' -H 'Access-Control-Request-Method: GET'
+
+docker exec -it enigma_frontend  curl -v --request OPTIONS 'http://enigma_backend:9000/scrumbles' -H 'Origin: http://localhost:8000' -H 'Access-Control-Request-Method: POST'
+
 ```
 
 <details>
