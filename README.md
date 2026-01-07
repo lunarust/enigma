@@ -5,6 +5,22 @@ Just a simulator build as a pet project to work with Yew & Rust.
 Note: I have little interest in css, so the presentation of the frontend is not fancy, not at all.
 
 
+## Potential new pet project...
+ Why crypto breaks” micro-lab
+
+ Build minimal demos of famous failures:
+
+ Caesar with frequency attack
+
+ Vigenère with Kasiski
+
+ Enigma with known plaintext
+
+ Each demo ≤ 100 lines.
+
+ Great closure to the Enigma arc.
+
+
 ## Todo / Could do
 - [X] Issues when my 3rd rotor ticks - identified, seems related to the double stepping effect...
 - [X] Add Plugboard
@@ -211,6 +227,8 @@ curl --location 'localhost:9000/scrumble' \
 }
 ```
  </details>
+
+
   - Test CORS:
 
 ```bash
@@ -384,15 +402,6 @@ Final output
 - [Code & ciphers #ex](https://www.codesandciphers.org.uk/enigma/example1.htm)
 
 
-> [!TIP]
-> Potential new pet project...
-> Why crypto breaks” micro-lab
-> Build minimal demos of famous failures:
-> Caesar with frequency attack
-> Vigenère with Kasiski
-> Enigma with known plaintext
-> Each demo ≤ 100 lines.
-> Great closure to the Enigma arc.
 
 
 > [!NOTE]
