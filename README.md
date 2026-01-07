@@ -8,16 +8,11 @@ Note: I have little interest in css, so the presentation of the frontend is not 
 ## Potential new pet project...
  Why crypto breaks” micro-lab
 
- Build minimal demos of famous failures:
-
+ Build minimal demos of famous failures
  Caesar with frequency attack
-
  Vigenère with Kasiski
-
  Enigma with known plaintext
-
  Each demo ≤ 100 lines.
-
  Great closure to the Enigma arc.
 
 
