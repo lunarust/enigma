@@ -43,7 +43,7 @@ async fn main() {
             ])
             .allow_headers(vec!["allow_origin", "allow_any_origin", "Access-Control-Allow-Origin", "Referer", "Control-Request-Headers", "Content-Type"])
             .max_age(300)
-            .allow_any_origin(),
+            //.allow_any_origin(),
     );
     warp::serve(routes).run(([0, 0, 0, 0], 9000)).await;
 }
