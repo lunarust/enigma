@@ -31,10 +31,12 @@ async fn main() {
     .or(unscrumble_routes)
     .or(hello)
     .with(
-        warp::cors()//.allow_any_origin()
+        warp::cors()
+            .allow_any_origin()
             .allow_origin("http://localhost")
-            //.allow_origin("http://enigma_frontend")
+            .allow_origin("http://enigma_frontend")
             .allow_origin("http://aetes.greece.local")
+            .allow_origin("http://tanit.greece.local:8001")
             .allow_methods(&[
                 Method::OPTIONS,
                 Method::GET,
