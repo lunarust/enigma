@@ -63,18 +63,40 @@ pub fn ServerApp(props: &ServerAppProps) -> Html {
             <main>
                 <Switch<Route> render={switch} />
             </main>
-            /*
+
             <footer class="footer">
-                <div class="content has-text-centered">
-                    { "Powered by " }
-                    <a href="https://yew.rs">{ "Yew" }</a>
-                    { " using " }
-                    <a href="https://bulma.io">{ "Bulma" }</a>
-                    { " and images from " }
-                    <a href="https://unsplash.com">{ "Unsplash" }</a>
+                <div class="content has-text-right">
+                    <span class="footer_icon"><a href="https://bulma.io">
+                      <img
+                        src="./resources/BulmaIcon.png"
+                        alt="Made with Bulma"
+                        width="15"
+                        height="24" />
+                    </a></span>
+
+                    <span class="footer_icon"><a href="https://yew.rs">
+                    <img
+                        src="https://avatars.githubusercontent.com/u/49116234?s=48&v=4"
+                        alt="Powered by Yew"
+                        width="24"
+                        height="24"
+                        /></a></span>
+
+                    <span class="footer_icon"><a href="https://github.com/lunarust">
+                      <img
+                        src="./resources/GitHub_Invertocat_White.svg"
+                        alt="GitHub"
+                        width="24"
+                        height="24" /></a></span>
+
+                    <span class="footer_icon">
+                      <img
+                        src="./resources/logo.svg"
+                        alt="Kappa"
+                        width="30"
+                        height="28" /></span>
                 </div>
             </footer>
-            */
         </Router>
     }
 }
