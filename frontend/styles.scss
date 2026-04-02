@@ -150,14 +150,18 @@ button[disabled]{
     z-index: 0;
     font-family: Noto Sans Black;
 }
-
+.footer_message {
+  position: absolute;
+  bottom: 60px;
+  opacity: .3;
+}
 .footer{
   position: absolute;
   bottom: 0px;
   width: 100%;
   height: 48px;
   z-index: 1;
-  text-align: right;
+  text-align: left;
   //opacity: 0.6;
 }
 footer{

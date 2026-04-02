@@ -261,7 +261,7 @@ pub fn Home() -> Html {
                 }
                 </div>
             if !message.is_empty() {
-                <p class="footer">{ &*message }</p>
+                <p class="footer_message">{ &*message }</p>
             }
         <span class="watermark">{ "enigma..." }</span>
 

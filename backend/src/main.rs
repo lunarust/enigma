@@ -34,6 +34,7 @@ async fn main() {
         warp::cors()
             .allow_any_origin()
             .allow_origin("http://localhost")
+            .allow_origin("http://localhost:8000")
             .allow_origin("http://enigma_frontend")
             .allow_origin("http://aetes.greece.local")
             .allow_origin("http://tanit.greece.local:8001")
