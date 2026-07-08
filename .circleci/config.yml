@@ -1,0 +1,47 @@
+version: 2.1
+
+executors:
+  rust-env:
+    docker:
+      - image: cimg/rust:1.75.0
+
+jobs:
+  test-and-build:
+    executor: rust-env
+    # Force the execution context explicitly to the root project folder
+    working_directory: ~/project
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v1-cargo-cache-{{ checksum "Cargo.lock" }}
+            - v1-cargo-cache-
+
+      # Running directly via cargo ensures the container's environment paths match
+      - run:
+          name: Run Workspace Tests
+          command: cargo test --workspace
+
+      - run:
+          name: Build Workspace Release binaries
+          command: cargo build --release --workspace
+
+      # If you strictly WANT to use your makefile, you must fix its PATH or invoke it like this:
+      # - run:
+      #     name: Run via Frontend Makefile
+      #     command: make test
+      #     working_directory: ~/project/frontend
+
+      - save_cache:
+          key: v1-cargo-cache-{{ checksum "Cargo.lock" }}
+          paths:
+            - "~/.cargo/registry"
+            - "~/.cargo/git"
+            - "target"
+
+workflows:
+  version: 2
+  ci-pipeline:
+    jobs:
+      - test-and-build
