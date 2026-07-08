@@ -10,6 +10,11 @@ jobs:
     executor: rust-env
     # Force the execution context explicitly to the root project folder
     working_directory: ~/project
+    docker:
+      - image: cimg/rust:1.75.0
+    environment:
+      CARGO_HTTP_MULTIPLEXING: "false" # Forces Cargo to fetch dependencies sequentially
+
     steps:
       - checkout
 

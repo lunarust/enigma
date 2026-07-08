@@ -1,10 +1,10 @@
-cargo-features = ["edition2024"]
+# cargo-features = ["edition2024"]
 
 [package]
 name = "backend"
 version = "0.1.0"
-edition = "2024"
-resolver = "3"
+#edition = "2024"
+resolver = "1"
 
 [dependencies]
 warp = { version = "0.4.2", features = ["server"] }
