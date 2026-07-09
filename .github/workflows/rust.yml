@@ -17,7 +17,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build Backend
-      run: /home/rust/.cargo/bin/cargo build
+      run: cargo build
       working-directory: backend      
     - name: Run tests
-      run: /home/rust/.cargo/bin/cargo test --verbose
+      run: cargo test --verbose
